@@ -1,14 +1,6 @@
 import { Section } from "@/components/section";
-import {
-  Boxes,
-  Brain,
-  Cloud,
-  Code2,
-  Lock,
-  Network,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { Boxes, Brain, Cloud, Code2, Lock, Network, ShieldCheck, Sparkles } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Domain = {
   id: string;
