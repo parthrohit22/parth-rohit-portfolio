@@ -92,6 +92,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Parth Rohit — Software Engineer" },
+      { name: "description", content: "A recruiter-facing engineering portfolio showcasing software engineering capabilities and project work." },
+      { property: "og:description", content: "A recruiter-facing engineering portfolio showcasing software engineering capabilities and project work." },
+      { name: "twitter:description", content: "A recruiter-facing engineering portfolio showcasing software engineering capabilities and project work." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6ddf8db0-fd08-445c-a2f1-136e0aea7ceb/id-preview-b32561d2--46834280-8f73-4a9a-8d10-4bebbf7f95a4.lovable.app-1781444338638.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6ddf8db0-fd08-445c-a2f1-136e0aea7ceb/id-preview-b32561d2--46834280-8f73-4a9a-8d10-4bebbf7f95a4.lovable.app-1781444338638.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
