@@ -34,7 +34,8 @@ function Index() {
       <SiteHeader />
       <Hero />
       <FeaturedWork />
-      <Breadth />
+      <Journey />
+      <WorkingStack />
       <Experience />
       <ResumeStrip />
       <Contact />
