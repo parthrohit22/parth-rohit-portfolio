@@ -5,7 +5,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { HeroVisual } from "@/components/hero-visual";
 import { Section } from "@/components/section";
 import { ProjectCard } from "@/components/project-card";
-import { breadth, experience, profile, projects, stack } from "@/lib/portfolio-data";
+import { Journey } from "@/components/journey";
+import { experience, profile, projects, stack } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
