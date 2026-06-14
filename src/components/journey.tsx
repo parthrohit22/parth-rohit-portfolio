@@ -7,7 +7,7 @@ type Domain = {
   label: string;
   caption: string;
   items: string[];
-  Icon: React.ComponentType<{ className?: string }>;
+  Icon: LucideIcon;
   accent: "blue" | "violet" | "indigo" | "core";
 };
 
