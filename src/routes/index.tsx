@@ -334,6 +334,7 @@ function CurrentlySeeking() {
   );
 }
 
+function FeaturedWork() {
   return (
     <Section
       id="work"
