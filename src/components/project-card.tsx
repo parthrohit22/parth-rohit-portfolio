@@ -1,5 +1,6 @@
 import type { Project } from "@/lib/portfolio-data";
 import { ArrowUpRight, Github } from "lucide-react";
+import { ProjectDiagram } from "@/components/project-diagram";
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
