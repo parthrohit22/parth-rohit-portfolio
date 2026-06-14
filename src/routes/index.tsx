@@ -50,13 +50,13 @@ function Index() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pb-16 pt-20 sm:pt-28">
+    <section className="relative overflow-hidden pb-20 pt-16 sm:pt-24">
       <div className="absolute inset-0 -z-10 grid-bg" />
       <div className="absolute inset-0 -z-10 hero-glow" />
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
           <div className="animate-reveal">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-blue opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-blue" />
@@ -64,15 +64,25 @@ function Hero() {
               Available for graduate & new-grad roles · Sep 2026
             </div>
 
-            <h1 className="text-balance text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
-              Software <span className="text-gradient">Engineer</span>
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Portfolio · v2026
+            </div>
+            <h1 className="mt-2 text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+              <span className="name-mark">Parth Rohit</span>
             </h1>
+            <div className="mt-3 text-xl font-medium text-foreground/85 sm:text-2xl">
+              Software Engineer
+            </div>
 
-            <p className="mt-6 max-w-xl text-balance text-lg font-medium text-foreground/85 sm:text-xl">
-              {profile.statement}
-            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[12px] text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><Cloud className="h-3.5 w-3.5 text-accent-blue" /> Cloud Platforms</span>
+              <span className="text-border">/</span>
+              <span className="inline-flex items-center gap-1.5"><Network className="h-3.5 w-3.5 text-accent-blue" /> Distributed Systems</span>
+              <span className="text-border">/</span>
+              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-accent-violet" /> Open Source Security</span>
+            </div>
 
-            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+            <p className="mt-7 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
               {profile.supporting}
             </p>
 
@@ -128,14 +138,202 @@ function Hero() {
 
         <div className="mt-20 flex items-center justify-center gap-2 text-xs text-muted-foreground">
           <ArrowDown className="h-3 w-3 animate-bounce" />
-          Featured work
+          Credibility & featured work
         </div>
       </div>
     </section>
   );
 }
 
-function FeaturedWork() {
+function Credibility() {
+  const badges = [
+    { icon: <Award className="h-3.5 w-3.5 text-accent-blue" />, label: "Dean's List — Year 1 & Year 2" },
+    { icon: <ShieldCheck className="h-3.5 w-3.5 text-accent-violet" />, label: "OWASP OpenShield Contributor" },
+    { icon: <Briefcase className="h-3.5 w-3.5 text-accent-blue" />, label: "BSc (Hons) Computing Systems" },
+    { icon: <MapPin className="h-3.5 w-3.5 text-muted-foreground" />, label: "Ulster University, London" },
+    { icon: <Sparkles className="h-3.5 w-3.5 text-accent-violet" />, label: "Graduation · Sep 2026" },
+    { icon: <ArrowRight className="h-3.5 w-3.5 text-accent-blue" />, label: "Open to Graduate Opportunities" },
+  ];
+  const focus = [
+    { icon: <Server className="h-3.5 w-3.5" />, label: "Backend Engineering" },
+    { icon: <Cloud className="h-3.5 w-3.5" />, label: "Cloud Platforms" },
+    { icon: <Network className="h-3.5 w-3.5" />, label: "Distributed Systems" },
+    { icon: <Lock className="h-3.5 w-3.5" />, label: "Security-Focused Systems" },
+  ];
+  return (
+    <section className="relative -mt-4 scroll-mt-24 pb-10">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="section-divider mb-10" />
+        <div className="card-premium relative overflow-hidden p-6 sm:p-8">
+          <div className="absolute inset-0 -z-10 dotted-bg opacity-40" />
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+            <div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                Credibility
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {badges.map((b) => (
+                  <span key={b.label} className="badge-premium">
+                    {b.icon}
+                    {b.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="lg:border-l lg:border-border lg:pl-6">
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                Engineering focus
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {focus.map((f) => (
+                  <div
+                    key={f.label}
+                    className="flex items-center gap-2 rounded-md border border-border bg-surface px-2.5 py-2 text-[12px] font-medium text-foreground"
+                  >
+                    <span className="grid h-6 w-6 place-items-center rounded bg-gradient-to-br from-accent-blue/15 to-accent-violet/15 text-accent-blue">
+                      {f.icon}
+                    </span>
+                    {f.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OpenSource() {
+  return (
+    <Section
+      id="open-source"
+      eyebrow="Open Source"
+      title="Contributing to security tooling in the open."
+      description="I contribute to OpenShield, an OWASP-affiliated open-source Cloud Security Posture Management platform for Microsoft Azure. My work focuses on the scanner, compliance mappings, and platform validation."
+    >
+      <div className="card-premium relative overflow-hidden p-8 sm:p-10">
+        <div className="absolute inset-0 -z-10 opacity-60 hero-glow" />
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="badge-premium">
+                <ShieldCheck className="h-3.5 w-3.5 text-accent-violet" /> OWASP Project
+              </span>
+              <span className="badge-premium">
+                <Cloud className="h-3.5 w-3.5 text-accent-blue" /> Azure CSPM
+              </span>
+              <span className="badge-premium">
+                <GitMerge className="h-3.5 w-3.5 text-accent-blue" /> Contributor
+              </span>
+            </div>
+            <h3 className="mt-5 text-2xl font-semibold tracking-tight">OpenShield</h3>
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-foreground/80">
+              Open-source Azure Cloud Security Posture Management platform —
+              security scan rules, remediation playbooks, and compliance
+              mappings against CIS Azure, NIST CSF, ISO 27001, and SOC 2.
+            </p>
+            <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+              {[
+                "Security scan rules",
+                "Compliance mappings",
+                "Azure validation testing",
+                "Platform validation workflows",
+              ].map((h) => (
+                <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-violet" />
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://github.com/openshield-org/openshield"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium transition-colors hover:bg-accent"
+              >
+                <Github className="h-3.5 w-3.5" /> openshield-org/openshield
+              </a>
+            </div>
+          </div>
+          <div className="rounded-xl border border-border bg-gradient-to-b from-surface to-background p-5">
+            <div className="mb-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              Compliance coverage
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {["CIS Azure", "NIST CSF", "ISO 27001", "SOC 2"].map((f) => (
+                <div
+                  key={f}
+                  className="rounded-md border border-border bg-card px-3 py-3 text-center font-mono text-[11px] text-foreground/80"
+                >
+                  {f}
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              Stack
+            </div>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {["Python", "Azure", "Flask", "PostgreSQL"].map((t) => (
+                <span key={t} className="rounded-md bg-foreground/5 px-2 py-0.5 font-mono text-[11px] text-foreground/70">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function CurrentlySeeking() {
+  const roles = [
+    "Graduate Software Engineer",
+    "Backend Engineer",
+    "Platform Engineer",
+    "Cloud Engineer",
+    "Infrastructure Engineer",
+    "Technology Graduate Programmes",
+  ];
+  return (
+    <section id="seeking" className="scroll-mt-24 py-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="card-premium relative overflow-hidden p-8 sm:p-10">
+          <div className="absolute inset-0 -z-10 hero-glow opacity-70" />
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+            <div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                Currently Seeking
+              </div>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                Roles where I can build serious systems.
+              </h2>
+              <p className="mt-3 max-w-md text-sm text-muted-foreground">
+                Targeting graduate and new-grad opportunities — September 2026.
+                Open to UK-based and remote-friendly engineering teams.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {roles.map((r) => (
+                <div
+                  key={r}
+                  className="flex items-center gap-2.5 rounded-md border border-border bg-card px-3 py-2.5 text-sm font-medium"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" />
+                  {r}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
   return (
     <Section
       id="work"
