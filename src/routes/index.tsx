@@ -5,7 +5,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { HeroVisual } from "@/components/hero-visual";
 import { Section } from "@/components/section";
 import { ProjectCard } from "@/components/project-card";
-import { breadth, experience, profile, projects, stack } from "@/lib/portfolio-data";
+import { Journey } from "@/components/journey";
+import { experience, profile, projects, stack } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,7 +34,8 @@ function Index() {
       <SiteHeader />
       <Hero />
       <FeaturedWork />
-      <Breadth />
+      <Journey />
+      <WorkingStack />
       <Experience />
       <ResumeStrip />
       <Contact />
@@ -146,57 +148,36 @@ function FeaturedWork() {
   );
 }
 
-function Breadth() {
+function WorkingStack() {
   return (
-    <Section
-      id="breadth"
-      eyebrow="Technical Breadth"
-      title="Computing Systems, end to end."
-      description="My degree provided practical exposure across the breadth of computing, while my strongest interests evolved toward backend engineering, cloud platforms, distributed systems, and security-focused software systems."
-    >
-      <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-        {breadth.map((b) => (
-          <div
-            key={b.area}
-            className="group relative bg-card p-6 transition-colors hover:bg-surface"
-          >
-            {b.focus && (
-              <span className="absolute right-4 top-4 rounded-full border border-accent-blue/30 bg-accent-blue/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-accent-blue">
-                Focus
-              </span>
-            )}
-            <h3 className="text-sm font-semibold tracking-tight">{b.area}</h3>
-            <ul className="mt-3 space-y-1.5">
-              {b.items.map((it) => (
-                <li key={it} className="font-mono text-[12px] text-muted-foreground">
-                  {it}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-10 card-premium p-8">
-        <div className="mb-5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-          Working stack
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {Object.entries(stack).map(([k, v]) => (
-            <div key={k}>
-              <div className="text-xs font-semibold tracking-wide text-foreground">{k}</div>
-              <ul className="mt-2 space-y-1">
-                {v.map((x) => (
-                  <li key={x} className="font-mono text-[12px] text-muted-foreground">
-                    {x}
-                  </li>
-                ))}
-              </ul>
+    <section className="scroll-mt-24 pb-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="card-premium p-8">
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              Working stack
             </div>
-          ))}
+            <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              day-to-day
+            </div>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {Object.entries(stack).map(([k, v]) => (
+              <div key={k}>
+                <div className="text-xs font-semibold tracking-wide text-foreground">{k}</div>
+                <ul className="mt-2 space-y-1">
+                  {v.map((x) => (
+                    <li key={x} className="font-mono text-[12px] text-muted-foreground">
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
