@@ -29,15 +29,11 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link to="/" className="group flex items-center gap-2.5">
-          <div className="relative h-7 w-7">
-            <div className="absolute inset-0 rounded-md bg-gradient-to-br from-accent-blue to-accent-violet opacity-90" />
-            <div className="absolute inset-[3px] rounded-sm bg-background" />
-            <div className="absolute inset-[6px] rounded-[2px] bg-gradient-to-br from-accent-blue to-accent-violet" />
-          </div>
-          <span className="font-mono text-sm font-medium tracking-tight">
-            parth<span className="text-muted-foreground">.rohit</span>
+          <span className="text-sm font-semibold tracking-tight">
+            Parth Rohit
           </span>
         </Link>
+
 
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
