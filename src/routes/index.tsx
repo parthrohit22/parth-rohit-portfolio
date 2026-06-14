@@ -147,8 +147,9 @@ function Hero() {
 
 function Credibility() {
   const badges = [
-    { icon: <Award className="h-3.5 w-3.5 text-accent-blue" />, label: "Dean's List — Year 1 & Year 2" },
+    { icon: <Award className="h-3.5 w-3.5 text-accent-blue" />, label: "Dean's List ×2 — Year 1 & Year 2" },
     { icon: <ShieldCheck className="h-3.5 w-3.5 text-accent-violet" />, label: "OWASP OpenShield Contributor" },
+    { icon: <Server className="h-3.5 w-3.5 text-accent-blue" />, label: "5 Engineering Systems Built" },
     { icon: <Briefcase className="h-3.5 w-3.5 text-accent-blue" />, label: "BSc (Hons) Computing Systems" },
     { icon: <MapPin className="h-3.5 w-3.5 text-muted-foreground" />, label: "Ulster University, London" },
     { icon: <Sparkles className="h-3.5 w-3.5 text-accent-violet" />, label: "Graduation · Sep 2026" },
