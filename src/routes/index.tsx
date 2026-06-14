@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Award, Briefcase, Cloud, Download, Github, GitMerge, Linkedin, Lock, Mail, MapPin, Network, Phone, Server, ShieldCheck, Sparkles } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HeroVisual } from "@/components/hero-visual";
@@ -11,11 +11,11 @@ import { experience, profile, projects, stack } from "@/lib/portfolio-data";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Parth Rohit — Software Engineer" },
+      { title: "Parth Rohit — Software Engineer · Cloud, Distributed Systems, Security" },
       {
         name: "description",
         content:
-          "Software Engineer building cloud-native, distributed, and security-focused systems. Featured work: LYTA, OpenShield, KALYX, FieldSight, Payment Routing.",
+          "Parth Rohit — Software Engineer building cloud-native, distributed, and security-focused systems. Featured work: LYTA, OpenShield, KALYX, FieldSight, Payment Routing.",
       },
       { property: "og:title", content: "Parth Rohit — Software Engineer" },
       {
@@ -33,16 +33,20 @@ function Index() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <Hero />
+      <Credibility />
       <FeaturedWork />
       <Journey />
       <WorkingStack />
+      <OpenSource />
       <Experience />
+      <CurrentlySeeking />
       <ResumeStrip />
       <Contact />
       <SiteFooter />
     </div>
   );
 }
+
 
 function Hero() {
   return (
