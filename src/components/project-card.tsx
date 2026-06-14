@@ -29,6 +29,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           {project.summary}
         </p>
 
+        <div className="mt-6">
+          <ProjectDiagram name={project.name} />
+        </div>
+
+
         <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
           {project.highlights.map((h) => (
             <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
