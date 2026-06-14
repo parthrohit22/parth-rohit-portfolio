@@ -1,12 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
+const resumePdfPath = "/Parth_Rohit_Resume.pdf";
+
 const nav = [
   { label: "Work", to: "/", hash: "#work" },
   { label: "Journey", to: "/", hash: "#journey" },
   { label: "Open Source", to: "/", hash: "#open-source" },
   { label: "Experience", to: "/", hash: "#experience" },
-  { label: "Resume", to: "/resume", hash: "" },
+  { label: "Resume", to: resumePdfPath, hash: "", opensInNewTab: true },
   { label: "Contact", to: "/", hash: "#contact" },
 ];
 
@@ -40,6 +42,8 @@ export function SiteHeader() {
             <a
               key={n.label}
               href={n.to === "/" ? n.hash || "/" : n.to}
+              target={n.opensInNewTab ? "_blank" : undefined}
+              rel={n.opensInNewTab ? "noreferrer" : undefined}
               className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             >
               {n.label}

@@ -458,7 +458,9 @@ function ResumeStrip() {
             </div>
             <div className="flex flex-wrap gap-3">
               <a
-                href="/resume"
+                href="/Parth_Rohit_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2.5 text-sm font-medium shadow-sm transition-colors hover:bg-accent"
               >
                 View Resume <ArrowUpRight className="h-4 w-4" />
