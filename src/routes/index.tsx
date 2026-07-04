@@ -98,21 +98,17 @@ function Index() {
 
 function Hero() {
   return (
-    <section id="top" className="scroll-mt-24 py-16 sm:py-24 lg:py-28">
+    <section id="top" className="scroll-mt-24 py-20 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:items-start">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20">
           <div>
-            <p className="section-label text-accent-blue">
+            <p className="eyebrow">
               {profile.name} · {profile.role}
             </p>
-            <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-balance sm:text-5xl sm:leading-[1.08] lg:text-[3.55rem]">
-              {profile.statement}
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">
-              {profile.supporting}
-            </p>
+            <h1 className="display-xl mt-6 max-w-4xl text-balance">{profile.statement}</h1>
+            <p className="body-lg mt-7 max-w-2xl">{profile.supporting}</p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-2.5">
               <a href="#work" className="action-link action-link-primary">
                 Selected Engineering Work <ArrowRight className="h-4 w-4" />
               </a>
@@ -129,43 +125,40 @@ function Hero() {
               </a>
             </div>
 
-            <dl className="mt-10 flex max-w-2xl flex-wrap gap-x-6 gap-y-3 border-t border-border pt-5 text-xs text-muted-foreground">
-              <div className="inline-flex items-center gap-2">
+            <dl className="mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border text-xs text-muted-foreground sm:grid-cols-2">
+              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3">
+                <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <dt className="sr-only">Location</dt>
-                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                <dd>{profile.location}</dd>
+                <dd className="truncate">{profile.location}</dd>
               </div>
-              <div>
-                <dt className="sr-only">Education</dt>
-                <dd>{profile.education.degree}</dd>
-              </div>
-              <div>
-                <dt className="sr-only">Graduation</dt>
-                <dd>{profile.education.graduation}</dd>
-              </div>
-              <div>
+              <div className="bg-surface-elevated px-4 py-3">
                 <dt className="sr-only">Availability</dt>
-                <dd>{profile.availability}</dd>
+                <dd className="truncate">{profile.availability}</dd>
+              </div>
+              <div className="bg-surface-elevated px-4 py-3">
+                <dt className="sr-only">Education</dt>
+                <dd className="truncate">{profile.education.degree}</dd>
+              </div>
+              <div className="bg-surface-elevated px-4 py-3">
+                <dt className="sr-only">Graduation</dt>
+                <dd className="truncate">{profile.education.graduation}</dd>
               </div>
             </dl>
           </div>
 
-          <aside
-            aria-labelledby="evidence-heading"
-            className="border-t border-border lg:border-t-0"
-          >
-            <div className="flex items-center justify-between border-b border-border py-4 lg:pt-0">
+          <aside aria-labelledby="evidence-heading" className="card-elevated p-6 sm:p-7">
+            <div className="flex items-center justify-between border-b border-border pb-4">
               <h2 id="evidence-heading" className="section-label">
                 Evidence before claims
               </h2>
               <span className="font-mono text-[10px] text-muted-foreground">01—04</span>
             </div>
-            <ol>
+            <ol className="divide-y divide-border">
               {proofPoints.map((item, index) => (
-                <li key={item.href} className="border-b border-border">
+                <li key={item.href}>
                   <a
                     href={item.href}
-                    className="group grid grid-cols-[2rem_1fr_auto] gap-3 py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                    className="group -mx-2 grid grid-cols-[2rem_1fr_auto] gap-3 rounded-md px-2 py-4 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                   >
                     <span className="font-mono text-[10px] text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
@@ -179,7 +172,7 @@ function Hero() {
                       </span>
                     </span>
                     <ArrowUpRight
-                      className="mt-0.5 h-4 w-4 text-muted-foreground group-hover:text-foreground"
+                      className="mt-0.5 h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
                       aria-hidden="true"
                     />
                   </a>
@@ -205,7 +198,7 @@ function SelectedWork() {
       title="Architecture, constraints, and decisions—not feature inventories."
       description="Six systems examined through the problem they address, the boundaries they establish, and the tradeoffs their repositories make visible."
     >
-      <div>
+      <div className="space-y-10 sm:space-y-14">
         {caseStudies.map((caseStudy, index) => (
           <EngineeringCaseStudyCard
             key={caseStudy.id}
@@ -227,14 +220,17 @@ function EngineeringApproach() {
       title="Make the important boundaries visible."
       description="These principles recur in the implementation choices above; they are not claims detached from the work."
     >
-      <div className="grid gap-px border border-border bg-border md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {principles.map((principle, index) => (
-          <article key={principle.title} className="bg-card p-6 sm:p-8">
-            <p className="font-mono text-[10px] text-muted-foreground">
-              {String(index + 1).padStart(2, "0")}
-            </p>
-            <h3 className="mt-5 text-xl font-semibold tracking-tight">{principle.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/75">{principle.description}</p>
+          <article key={principle.title} className="card-elevated p-7 sm:p-8">
+            <div className="flex items-center justify-between">
+              <span className="inline-flex items-center rounded-full border border-border bg-surface-elevated px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent-blue" />
+            </div>
+            <h3 className="mt-6 text-xl font-semibold tracking-tight">{principle.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-foreground/80">{principle.description}</p>
             <p className="mt-6 border-t border-border pt-4 font-mono text-[10px] leading-5 text-muted-foreground">
               Evidence: {principle.evidence}
             </p>
@@ -253,11 +249,18 @@ function CapabilityMap() {
       title="What the work demonstrates."
       description="Tools appear as supporting evidence. The organizing layer is the engineering capability they enable."
     >
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((capability) => (
-          <article key={capability.title} className="border-t border-foreground pt-5">
+          <article
+            key={capability.title}
+            className="card-elevated relative overflow-hidden p-6 pt-7"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-0.5 bg-accent-blue"
+            />
             <h3 className="text-base font-semibold tracking-tight">{capability.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/75">{capability.description}</p>
+            <p className="mt-3 text-sm leading-6 text-foreground/80">{capability.description}</p>
             <p className="mt-5 font-mono text-[10px] leading-5 text-muted-foreground">
               {capability.evidence.join(" · ")}
             </p>
@@ -276,22 +279,24 @@ function Experience() {
       title="Engineering habits formed in operational work."
       description="The role combined workflow improvement with practical responsibility for the systems people depended on each day."
     >
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
-        <article className="border-t border-foreground pt-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
+        <article className="card-elevated p-7 sm:p-9">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h3 className="text-xl font-semibold tracking-tight">{experience.role}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="mt-1.5 text-sm text-muted-foreground">
                 {experience.company} · {experience.location}
               </p>
             </div>
-            <p className="font-mono text-[10px] text-muted-foreground">{experience.period}</p>
+            <span className="inline-flex w-fit items-center rounded-full border border-border bg-surface-elevated px-2.5 py-1 font-mono text-[10px] text-muted-foreground">
+              {experience.period}
+            </span>
           </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+          <div className="mt-8 grid gap-8 border-t border-border pt-8 sm:grid-cols-3 sm:gap-6">
             {experience.contributions.map((contribution) => (
               <section key={contribution.title}>
                 <h4 className="section-label text-accent-blue">{contribution.title}</h4>
-                <p className="mt-3 text-sm leading-6 text-foreground/75">
+                <p className="mt-3 text-sm leading-6 text-foreground/80">
                   {contribution.description}
                 </p>
               </section>
@@ -299,7 +304,7 @@ function Experience() {
           </div>
         </article>
 
-        <article className="border-t border-foreground pt-6">
+        <article className="card-elevated p-7 sm:p-9">
           <p className="section-label text-accent-blue">Education</p>
           <h3 className="mt-4 text-xl font-semibold tracking-tight">{profile.education.degree}</h3>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -307,7 +312,7 @@ function Experience() {
             <br />
             {profile.education.graduation}
           </p>
-          <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-foreground/75">
+          <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-foreground/80">
             {profile.education.achievements[0]}
           </p>
         </article>
@@ -324,8 +329,8 @@ function Contact() {
       title="Continue the technical conversation."
       description="Open to UK graduate and new-grad software engineering opportunities from September 2026."
     >
-      <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr]">
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr]">
+        <div className="grid gap-3 sm:grid-cols-2">
           <ContactLink
             href={`mailto:${profile.email}`}
             icon={<Mail className="h-4 w-4" />}
@@ -354,7 +359,7 @@ function Contact() {
           />
         </div>
 
-        <aside className="border-t border-foreground pt-6">
+        <aside className="card-elevated p-7 sm:p-8">
           <p className="section-label text-accent-blue">Resume</p>
           <h3 className="mt-4 text-xl font-semibold tracking-tight">
             Concise background and selected work.
@@ -363,7 +368,7 @@ function Contact() {
             The PDF remains the single source of truth for education, experience, capabilities, and
             contact details.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-2.5">
             <a
               href="/Parth_Rohit_Resume.pdf"
               target="_blank"
@@ -400,17 +405,17 @@ function ContactLink({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="group flex min-w-0 items-center gap-4 bg-card p-5 focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+      className="card-elevated group flex min-w-0 items-center gap-4 p-5"
     >
-      <span className="grid h-9 w-9 shrink-0 place-items-center border border-border text-muted-foreground">
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-border bg-surface-elevated text-accent-blue">
         {icon}
       </span>
       <span className="min-w-0">
-        <span className="section-label block text-muted-foreground">{label}</span>
+        <span className="section-label block">{label}</span>
         <span className="mt-1 block truncate text-sm font-medium">{value}</span>
       </span>
       <ArrowUpRight
-        className="ml-auto h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground"
+        className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
         aria-hidden="true"
       />
     </a>
