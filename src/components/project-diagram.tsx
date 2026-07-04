@@ -48,13 +48,28 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
   return (
     <figure
       className="overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)]"
-      style={{ background: "var(--gradient-diagram-bg, linear-gradient(180deg, var(--surface), var(--surface-muted)))" }}
+      style={{
+        background:
+          "var(--gradient-diagram-bg, linear-gradient(180deg, var(--surface), var(--surface-muted)))",
+      }}
     >
       <div className="flex items-center justify-between gap-3 border-b border-border/70 bg-surface-elevated/60 px-4 py-2.5 sm:px-5">
         <div className="flex items-center gap-2">
-          <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ background: "color-mix(in oklab, var(--project-accent) 60%, transparent)" }} />
-          <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ background: "color-mix(in oklab, var(--project-accent) 35%, transparent)" }} />
-          <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ background: "var(--project-accent)" }} />
+          <span
+            aria-hidden="true"
+            className="h-2 w-2 rounded-full"
+            style={{ background: "color-mix(in oklab, var(--project-accent) 60%, transparent)" }}
+          />
+          <span
+            aria-hidden="true"
+            className="h-2 w-2 rounded-full"
+            style={{ background: "color-mix(in oklab, var(--project-accent) 35%, transparent)" }}
+          />
+          <span
+            aria-hidden="true"
+            className="h-2 w-2 rounded-full"
+            style={{ background: "var(--project-accent)" }}
+          />
           <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             architecture.svg
           </span>
@@ -69,7 +84,10 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
 
       {/* Mobile flow list */}
       <div className="p-4 sm:hidden">
-        <ol className="relative space-y-3 border-l border-border pl-6" aria-label={`${caseStudy.name} architecture flow`}>
+        <ol
+          className="relative space-y-3 border-l border-border pl-6"
+          aria-label={`${caseStudy.name} architecture flow`}
+        >
           {architecture.edges.map((edge, index) => {
             const from = nodes.get(edge.from);
             const to = nodes.get(edge.to);
@@ -86,11 +104,19 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
                 </span>
                 <div>
                   <strong className="font-medium text-foreground">{from.label}</strong>
-                  <span className="mx-2" aria-hidden="true" style={{ color: "var(--project-accent)" }}>→</span>
+                  <span
+                    className="mx-2"
+                    aria-hidden="true"
+                    style={{ color: "var(--project-accent)" }}
+                  >
+                    →
+                  </span>
                   <strong className="font-medium text-foreground">{to.label}</strong>
                 </div>
                 {edge.label && (
-                  <div className="mt-0.5 font-mono text-[11px] text-muted-foreground">{edge.label}</div>
+                  <div className="mt-0.5 font-mono text-[11px] text-muted-foreground">
+                    {edge.label}
+                  </div>
                 )}
               </li>
             );
@@ -239,7 +265,10 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
                   stroke="var(--project-accent)"
                   strokeWidth={1}
                   opacity={0.55}
-                  style={{ filter: "drop-shadow(0 0 12px color-mix(in oklab, var(--project-accent) 60%, transparent))" }}
+                  style={{
+                    filter:
+                      "drop-shadow(0 0 12px color-mix(in oklab, var(--project-accent) 60%, transparent))",
+                  }}
                 />
               )}
               <rect

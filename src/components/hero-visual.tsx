@@ -11,7 +11,13 @@ type Domain = {
 // Eight engineering domains arranged around a central "Software Engineering" node.
 const DOMAINS: Domain[] = [
   { id: "backend", label: "Backend Systems", short: "backend", angle: -90, radius: 150 },
-  { id: "distributed", label: "Distributed Systems", short: "distributed", angle: -45, radius: 155 },
+  {
+    id: "distributed",
+    label: "Distributed Systems",
+    short: "distributed",
+    angle: -45,
+    radius: 155,
+  },
   { id: "cloud", label: "Cloud Platforms", short: "cloud", angle: 0, radius: 150 },
   { id: "api", label: "API Design", short: "api", angle: 45, radius: 155 },
   { id: "observability", label: "Observability", short: "observability", angle: 90, radius: 150 },
@@ -44,7 +50,11 @@ export function HeroVisual() {
     if (!el) return;
     const onMove = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
-      setPointer({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, active: true });
+      setPointer({
+        x: (e.clientX - r.left) / r.width,
+        y: (e.clientY - r.top) / r.height,
+        active: true,
+      });
     };
     const onLeave = () => {
       setPointer((p) => ({ ...p, active: false }));
@@ -66,7 +76,7 @@ export function HeroVisual() {
 
   const positions = useMemo(
     () => DOMAINS.map((d) => ({ ...d, ...polar(CENTER.x, CENTER.y, d.radius, d.angle) })),
-    []
+    [],
   );
 
   const activeId = hoverId ?? DOMAINS[autoIdx].id;
@@ -91,10 +101,19 @@ export function HeroVisual() {
         }}
       />
 
-      <svg viewBox="0 0 600 420" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet">
+      <svg
+        viewBox="0 0 600 420"
+        className="absolute inset-0 h-full w-full"
+        preserveAspectRatio="xMidYMid meet"
+      >
         <defs>
           <pattern id="hv-grid" width="26" height="26" patternUnits="userSpaceOnUse">
-            <path d="M 26 0 L 0 0 0 26" fill="none" stroke="color-mix(in oklab, var(--accent-blue) 16%, transparent)" strokeWidth="0.6" />
+            <path
+              d="M 26 0 L 0 0 0 26"
+              fill="none"
+              stroke="color-mix(in oklab, var(--accent-blue) 16%, transparent)"
+              strokeWidth="0.6"
+            />
           </pattern>
           <radialGradient id="hv-mask" cx="50%" cy="50%" r="60%">
             <stop offset="0%" stopColor="white" stopOpacity="1" />
@@ -115,10 +134,20 @@ export function HeroVisual() {
           </linearGradient>
         </defs>
 
-        <rect width="600" height="420" fill="url(#hv-grid)" mask="url(#hv-grid-mask)" opacity="0.85" />
+        <rect
+          width="600"
+          height="420"
+          fill="url(#hv-grid)"
+          mask="url(#hv-grid-mask)"
+          opacity="0.85"
+        />
 
         {/* Orbit rings */}
-        <g fill="none" stroke="color-mix(in oklab, var(--accent-blue) 18%, transparent)" strokeDasharray="2 6">
+        <g
+          fill="none"
+          stroke="color-mix(in oklab, var(--accent-blue) 18%, transparent)"
+          strokeDasharray="2 6"
+        >
           <circle cx={CENTER.x} cy={CENTER.y} r={95} opacity="0.55" />
           <circle cx={CENTER.x} cy={CENTER.y} r={152} opacity="0.35" />
           <circle cx={CENTER.x} cy={CENTER.y} r={188} opacity="0.18" />
@@ -206,7 +235,15 @@ export function HeroVisual() {
             stroke="color-mix(in oklab, var(--accent-blue) 70%, var(--border))"
             strokeWidth={1.6}
           />
-          <circle cx={CENTER.x} cy={CENTER.y} r={62} fill="none" stroke="var(--accent-blue)" strokeWidth={1} opacity={0}>
+          <circle
+            cx={CENTER.x}
+            cy={CENTER.y}
+            r={62}
+            fill="none"
+            stroke="var(--accent-blue)"
+            strokeWidth={1}
+            opacity={0}
+          >
             <animate attributeName="r" values="54;78" dur="2.6s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.55;0" dur="2.6s" repeatCount="indefinite" />
           </circle>
@@ -273,7 +310,10 @@ export function HeroVisual() {
                     stroke="var(--accent-blue)"
                     strokeWidth={1}
                     opacity={0.55}
-                    style={{ filter: "drop-shadow(0 0 10px color-mix(in oklab, var(--accent-blue) 70%, transparent))" }}
+                    style={{
+                      filter:
+                        "drop-shadow(0 0 10px color-mix(in oklab, var(--accent-blue) 70%, transparent))",
+                    }}
                   />
                 )}
                 <circle
@@ -288,9 +328,21 @@ export function HeroVisual() {
                   }}
                 />
                 {hot && (
-                  <circle cx={d.x} cy={d.y} r={8} fill="none" stroke="var(--accent-blue)" strokeWidth={1}>
+                  <circle
+                    cx={d.x}
+                    cy={d.y}
+                    r={8}
+                    fill="none"
+                    stroke="var(--accent-blue)"
+                    strokeWidth={1}
+                  >
                     <animate attributeName="r" values="8;22" dur="1.4s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.65;0" dur="1.4s" repeatCount="indefinite" />
+                    <animate
+                      attributeName="opacity"
+                      values="0.65;0"
+                      dur="1.4s"
+                      repeatCount="indefinite"
+                    />
                   </circle>
                 )}
                 <text
@@ -300,7 +352,11 @@ export function HeroVisual() {
                   fontFamily="Inter, ui-sans-serif, sans-serif"
                   fontSize="10.5"
                   fontWeight={hot ? 600 : 500}
-                  fill={hot ? "var(--foreground)" : "color-mix(in oklab, var(--foreground) 62%, transparent)"}
+                  fill={
+                    hot
+                      ? "var(--foreground)"
+                      : "color-mix(in oklab, var(--foreground) 62%, transparent)"
+                  }
                   style={{ letterSpacing: "0.02em", transition: "fill 220ms ease" }}
                 >
                   {d.label}

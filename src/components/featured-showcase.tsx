@@ -58,7 +58,10 @@ export function FeaturedShowcase() {
 
         <div className="mb-12 grid gap-8 lg:grid-cols-12 lg:items-end">
           <h2 id="featured-heading" className="display-lg lg:col-span-8">
-            Three systems worth <span className="text-[color:var(--accent-blue)] font-mono text-3xl align-middle">→</span>{" "}
+            Three systems worth{" "}
+            <span className="text-[color:var(--accent-blue)] font-mono text-3xl align-middle">
+              →
+            </span>{" "}
             <span className="text-foreground">studying.</span>
           </h2>
           <div className="lg:col-span-4 lg:pb-2 lg:text-right">
@@ -208,8 +211,24 @@ function TileBackdrop({ hero }: { hero: boolean }) {
               <stop offset="100%" stopColor="var(--project-accent)" stopOpacity="0.35" />
             </radialGradient>
           </defs>
-          <circle cx="200" cy="120" r="90" fill="none" stroke="var(--project-accent)" strokeWidth="0.5" opacity="0.5" />
-          <circle cx="200" cy="120" r="60" fill="none" stroke="var(--project-accent)" strokeWidth="0.5" opacity="0.35" />
+          <circle
+            cx="200"
+            cy="120"
+            r="90"
+            fill="none"
+            stroke="var(--project-accent)"
+            strokeWidth="0.5"
+            opacity="0.5"
+          />
+          <circle
+            cx="200"
+            cy="120"
+            r="60"
+            fill="none"
+            stroke="var(--project-accent)"
+            strokeWidth="0.5"
+            opacity="0.35"
+          />
           <circle cx="200" cy="120" r="30" fill="url(#tile-ring)" />
         </svg>
       )}

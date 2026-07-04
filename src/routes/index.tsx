@@ -71,10 +71,7 @@ function Index() {
 
 function Hero() {
   return (
-    <section
-      id="top"
-      className="relative scroll-mt-24 overflow-hidden pb-28 pt-6 sm:pb-36"
-    >
+    <section id="top" className="relative scroll-mt-24 overflow-hidden pb-28 pt-6 sm:pb-36">
       {/* Living atmosphere */}
       <div className="hero-canvas" aria-hidden="true">
         <div className="hero-orb hero-orb--a" />
@@ -114,12 +111,10 @@ function Hero() {
             <p className="body-lg mt-8 max-w-xl">
               A software engineer working across{" "}
               <span className="text-foreground">backend services</span>,{" "}
-              <span className="text-foreground">cloud infrastructure</span>, and
-              the{" "}
-              <span className="text-foreground">APIs</span> that hold them
-              together. I care about clear state ownership, secure boundaries,
-              and systems that keep behaving well as they scale — with recent
-              work in distributed edge platforms and cloud-security tooling.
+              <span className="text-foreground">cloud infrastructure</span>, and the{" "}
+              <span className="text-foreground">APIs</span> that hold them together. I care about
+              clear state ownership, secure boundaries, and systems that keep behaving well as they
+              scale — with recent work in distributed edge platforms and cloud-security tooling.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -129,12 +124,7 @@ function Hero() {
                 </a>
               </Magnetic>
               <Magnetic>
-                <a
-                  href={profile.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="action-link"
-                >
+                <a href={profile.github} target="_blank" rel="noreferrer" className="action-link">
                   <Github className="h-3.5 w-3.5" /> GitHub
                 </a>
               </Magnetic>
@@ -184,7 +174,6 @@ function Hero() {
     </section>
   );
 }
-
 
 /* ─── ALL SYSTEMS ─────────────────────────────── */
 
@@ -242,9 +231,7 @@ function EngineeringApproach() {
             <h3 className="mt-8 text-2xl font-semibold leading-tight tracking-[-0.015em]">
               {principle.title}
             </h3>
-            <p className="mt-5 text-[15px] leading-7 text-foreground/75">
-              {principle.description}
-            </p>
+            <p className="mt-5 text-[15px] leading-7 text-foreground/75">{principle.description}</p>
             <p className="mt-8 border-t border-border pt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Evidence · {principle.evidence}
             </p>
@@ -279,9 +266,7 @@ function CapabilityMap() {
             <h3 className="mt-4 text-xl font-semibold leading-tight tracking-[-0.01em]">
               {capability.title}
             </h3>
-            <p className="mt-4 text-sm leading-6 text-foreground/70">
-              {capability.description}
-            </p>
+            <p className="mt-4 text-sm leading-6 text-foreground/70">{capability.description}</p>
             <ul className="mt-6 flex flex-wrap gap-1.5">
               {capability.evidence.map((tech) => (
                 <li key={tech} className="tech-chip">
@@ -314,9 +299,7 @@ function Experience() {
             <h3 className="text-2xl font-semibold leading-tight tracking-[-0.015em] sm:text-3xl">
               {experience.role}
             </h3>
-            <span className="mono-label whitespace-nowrap">
-              {experience.period}
-            </span>
+            <span className="mono-label whitespace-nowrap">{experience.period}</span>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">
             {experience.company} · {experience.location}
@@ -328,9 +311,7 @@ function Experience() {
                   <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--aurora-green)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h4 className="section-label !text-foreground/85">
-                    {contribution.title}
-                  </h4>
+                  <h4 className="section-label !text-foreground/85">{contribution.title}</h4>
                 </div>
                 <p className="mt-3 text-sm leading-6 text-foreground/75">
                   {contribution.description}
@@ -363,10 +344,7 @@ function Experience() {
 
 function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative scroll-mt-24 py-32 sm:py-40"
-    >
+    <section id="contact" className="relative scroll-mt-24 py-32 sm:py-40">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         <div className="ledger mb-16">
           <span className="ledger-num">§ 07</span>
@@ -378,15 +356,14 @@ function Contact() {
         <div className="grid gap-16 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <h2 className="display-lg">
-              Let's talk{" "}
-              <span className="text-[color:var(--accent-blue)]">infrastructure</span>,
+              Let's talk <span className="text-[color:var(--accent-blue)]">infrastructure</span>,
               verification, and{" "}
               <span className="text-[color:var(--accent-violet)]">boundaries</span>.
             </h2>
             <p className="body-lg mt-8 max-w-xl">
-              Open to UK graduate and new-grad software engineering opportunities
-              from September 2026. Best reached by email — the resume is the
-              single source of truth for background, experience, and capabilities.
+              Open to UK graduate and new-grad software engineering opportunities from September
+              2026. Best reached by email — the resume is the single source of truth for background,
+              experience, and capabilities.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">

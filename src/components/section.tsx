@@ -28,9 +28,7 @@ export function Section({
         </div>
         <header className="mb-14 grid gap-8 lg:grid-cols-12 lg:items-end">
           <h2 className="display-lg lg:col-span-8">{title}</h2>
-          {description && (
-            <p className="body-lg max-w-md lg:col-span-4 lg:pb-2">{description}</p>
-          )}
+          {description && <p className="body-lg max-w-md lg:col-span-4 lg:pb-2">{description}</p>}
         </header>
         {children}
       </div>

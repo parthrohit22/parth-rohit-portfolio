@@ -53,11 +53,16 @@ export function EngineeringCaseStudyCard({
                 className="inline-flex items-center gap-2 rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em]"
                 style={{
                   borderColor: "color-mix(in oklab, var(--project-accent) 40%, var(--border))",
-                  background: "color-mix(in oklab, var(--project-accent) 8%, var(--surface-elevated))",
+                  background:
+                    "color-mix(in oklab, var(--project-accent) 8%, var(--surface-elevated))",
                   color: "var(--project-accent)",
                 }}
               >
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--project-accent)" }} />
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ background: "var(--project-accent)" }}
+                />
                 {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
@@ -81,7 +86,12 @@ export function EngineeringCaseStudyCard({
               <Github className="h-4 w-4" /> Repository
             </a>
             {caseStudy.demo && (
-              <a href={caseStudy.demo} target="_blank" rel="noreferrer" className="action-link action-link-primary">
+              <a
+                href={caseStudy.demo}
+                target="_blank"
+                rel="noreferrer"
+                className="action-link action-link-primary"
+              >
                 Live system <ArrowUpRight className="h-4 w-4" />
               </a>
             )}
@@ -174,7 +184,9 @@ export function EngineeringCaseStudyCard({
                       style={{ background: "var(--project-accent)" }}
                     />
                     <p className="text-sm leading-6 text-foreground/80">
-                      <strong className="font-semibold text-foreground">Contribution boundary.</strong>{" "}
+                      <strong className="font-semibold text-foreground">
+                        Contribution boundary.
+                      </strong>{" "}
                       {caseStudy.contribution}
                     </p>
                   </div>
@@ -184,11 +196,15 @@ export function EngineeringCaseStudyCard({
               <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
                 <section>
                   <h4 className="section-label">Problem</h4>
-                  <p className="mt-4 text-[15px] leading-7 text-foreground/80">{caseStudy.problem}</p>
+                  <p className="mt-4 text-[15px] leading-7 text-foreground/80">
+                    {caseStudy.problem}
+                  </p>
                 </section>
                 <section>
                   <h4 className="section-label">Why it matters</h4>
-                  <p className="mt-4 text-[15px] leading-7 text-foreground/80">{caseStudy.significance}</p>
+                  <p className="mt-4 text-[15px] leading-7 text-foreground/80">
+                    {caseStudy.significance}
+                  </p>
                 </section>
               </div>
 
@@ -262,7 +278,10 @@ export function EngineeringCaseStudyCard({
                       </div>
                       <dl className="mt-5 space-y-4 text-sm leading-6">
                         <div>
-                          <dt className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: "var(--project-accent)" }}>
+                          <dt
+                            className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                            style={{ color: "var(--project-accent)" }}
+                          >
                             Why this fits
                           </dt>
                           <dd className="mt-1.5 text-foreground/80">{decision.rationale}</dd>
@@ -271,7 +290,9 @@ export function EngineeringCaseStudyCard({
                           <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                             Why not the obvious alternative
                           </dt>
-                          <dd className="mt-1.5 text-foreground/80">{decision.rejectedAlternative}</dd>
+                          <dd className="mt-1.5 text-foreground/80">
+                            {decision.rejectedAlternative}
+                          </dd>
                         </div>
                         <div>
                           <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
