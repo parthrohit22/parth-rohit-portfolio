@@ -15,36 +15,26 @@ import { HeroVisual } from "@/components/hero-visual";
 import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { RotatingText } from "@/components/rotating-text";
 import { CursorGlow } from "@/components/cursor-glow";
 import { Magnetic } from "@/components/magnetic";
-import { Tilt } from "@/components/tilt";
 import { capabilities, caseStudies, experience, principles, profile } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      {
-        title: "Parth Rohit — Software Engineer",
-      },
+      { title: "Parth Rohit — Software Engineer" },
       {
         name: "description",
         content:
           "Evidence-led engineering portfolio covering explicit state ownership, deterministic verification, backend authorization, cloud architecture, and open-source security contributions.",
       },
-      {
-        property: "og:title",
-        content: "Parth Rohit — Software Engineer",
-      },
+      { property: "og:title", content: "Parth Rohit — Software Engineer" },
       {
         property: "og:description",
         content:
           "Selected engineering work across stateful edge systems, verification, cloud platforms, backend authorization, and security tooling.",
       },
-      {
-        name: "twitter:title",
-        content: "Parth Rohit — Software Engineer",
-      },
+      { name: "twitter:title", content: "Parth Rohit — Software Engineer" },
       {
         name: "twitter:description",
         content:
@@ -55,44 +45,19 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const proofPoints = [
-  {
-    href: "#lyta",
-    label: "Explicit edge-state ownership",
-    evidence:
-      "LYTA separates account, workspace, and conversation state across purpose-specific Durable Objects.",
-  },
-  {
-    href: "#kalyx",
-    label: "Deterministic evidence verification",
-    evidence: "KALYX recomputes canonical hashes and reports the first untrusted ledger boundary.",
-  },
-  {
-    href: "#payment-routing",
-    label: "Backend-enforced authorization",
-    evidence:
-      "Payment Routing scopes merchant data and role-controlled mutations inside the Flask API.",
-  },
-  {
-    href: "#openshield",
-    label: "Merged cloud-security work",
-    evidence:
-      "OpenShield contributions connect Azure Key Vault rules to remediation, mappings, and validation.",
-  },
-];
-
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background text-foreground">
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
       <CursorGlow />
       <SiteHeader />
-      <main id="main-content" className="pt-20 sm:pt-24">
+      <main id="main-content" className="pt-24 sm:pt-28">
         <Hero />
+        <SystemPlate />
         <FeaturedShowcase />
-        <SelectedWork />
+        <AllSystems />
         <EngineeringApproach />
         <CapabilityMap />
         <Experience />
@@ -103,70 +68,79 @@ function Index() {
   );
 }
 
+/* ─── HERO ─────────────────────────────── */
+
 function Hero() {
   return (
-    <section id="top" className="relative scroll-mt-24 overflow-hidden pb-16 pt-8 sm:pb-20 sm:pt-12 lg:pb-28 lg:pt-16">
-      <div aria-hidden="true" className="hero-backdrop" />
-      <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:items-center lg:gap-14">
-          <div className="reveal-up">
-            <p className="eyebrow">
-              <span>Parth Rohit</span>
-              <span aria-hidden="true" className="opacity-40">/</span>
-              <span>{profile.location}</span>
-            </p>
+    <section
+      id="top"
+      className="relative scroll-mt-24 overflow-hidden pb-24 pt-8 sm:pb-32"
+    >
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        {/* Colophon rule */}
+        <div className="ledger mb-16 sm:mb-20">
+          <span className="ledger-num">§ 01</span>
+          <span className="ledger-title">Portfolio Vol. 03</span>
+          <span className="ledger-dash" aria-hidden="true" />
+          <span className="ledger-meta">Engineering journal · Est. 2026</span>
+        </div>
 
-            <h1 className="display-xl mt-6 max-w-4xl text-balance">
-              Software Engineer.
+        <div className="reveal-up grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <div className="lg:col-span-8">
+            <p className="eyebrow mb-8">Software Engineer · {profile.location}</p>
+
+            <h1 className="display-xl text-balance">
+              Engineering{" "}
+              <em className="not-italic font-display text-[color:var(--aurora-green)]">
+                resilient
+              </em>
+              <br />
+              architectures.
             </h1>
+          </div>
 
-            <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-lg sm:text-xl font-medium tracking-tight text-muted-foreground">
-              <span>Currently building</span>
-              <RotatingText />
-            </p>
-
-            <p className="body-lg mt-6 max-w-xl">
-              Distributed edge workspaces, hash-linked evidence integrity, role-scoped backend
-              authority, and merged cloud-security work.
+          <div className="border-l border-border pl-6 sm:pl-8 lg:col-span-4 lg:pb-6">
+            <p className="body-lg">
+              A software engineer building around{" "}
+              <span className="text-[color:var(--aurora-green)] not-italic">
+                explicit state ownership
+              </span>
+              , deterministic verification, and{" "}
+              <span className="text-[color:var(--aurora-violet)] not-italic">
+                enforceable API boundaries
+              </span>
+              . Distributed edge workspaces, hash-linked evidence ledgers,
+              role-scoped backend authority, and merged cloud-security work.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-2.5">
               <Magnetic>
                 <a href="#featured" className="action-link action-link-primary">
-                  Explore featured systems <ArrowRight className="h-4 w-4" />
-                </a>
-              </Magnetic>
-              <Magnetic>
-                <a href={profile.github} target="_blank" rel="noreferrer" className="action-link">
-                  <Github className="h-4 w-4" /> GitHub
+                  Explore systems <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               </Magnetic>
               <Magnetic>
                 <a
-                  href="/Parth_Rohit_Resume.pdf"
+                  href={profile.github}
                   target="_blank"
                   rel="noreferrer"
                   className="action-link"
                 >
-                  <FileText className="h-4 w-4" /> Resume
+                  <Github className="h-3.5 w-3.5" /> GitHub
                 </a>
               </Magnetic>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               <span className="inline-flex items-center gap-2">
                 <span className="status-dot" aria-hidden="true" />
                 {profile.availability}
               </span>
-              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="opacity-40" aria-hidden="true">
+                /
+              </span>
               <span>{profile.education.degree}</span>
             </div>
-          </div>
-
-          <div className="reveal-up" style={{ animationDelay: "120ms" }}>
-            <Tilt max={5} lift={4} scale={1.005}>
-              <HeroVisual />
-            </Tilt>
           </div>
         </div>
       </div>
@@ -174,14 +148,56 @@ function Hero() {
   );
 }
 
-function SelectedWork() {
+/* ─── SYSTEM PLATE (hero visual as magazine figure) ─────────────────────────────── */
+
+function SystemPlate() {
+  return (
+    <section
+      aria-labelledby="plate-heading"
+      className="relative py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
+          <div className="lg:col-span-4">
+            <span className="mono-label">Fig. I / System Plate</span>
+            <h2
+              id="plate-heading"
+              className="mt-4 font-display text-3xl italic leading-tight sm:text-4xl"
+            >
+              How a stateful edge workspace assigns ownership.
+            </h2>
+            <p className="mt-5 max-w-sm text-sm leading-6 text-foreground/70">
+              Requests resolve identity at a Worker Router, then coordinate work
+              across purpose-specific Durable Objects. Each boundary is a state
+              contract, not a shared blob.
+            </p>
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
+              Adapted · LYTA architecture
+            </p>
+          </div>
+
+          <div className="lg:col-span-8">
+            <div className="glass-panel overflow-hidden rounded-lg p-2 sm:p-3">
+              <HeroVisual />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── ALL SYSTEMS ─────────────────────────────── */
+
+function AllSystems() {
   return (
     <Section
       id="work"
-      number="01"
-      eyebrow="All Work"
+      number="03"
+      eyebrow="All Systems"
       title="Six systems, in depth."
       description="Each case study opens with the problem and boundary it makes explicit. Deeper tradeoffs, decisions, and technologies expand progressively."
+      meta="6 CASE STUDIES · READ ALL"
     >
       <div className="space-y-10 sm:space-y-14">
         {caseStudies.map((caseStudy, index) => (
@@ -197,28 +213,41 @@ function SelectedWork() {
   );
 }
 
+/* ─── PRINCIPLES ─────────────────────────────── */
+
 function EngineeringApproach() {
   return (
     <Section
       id="approach"
-      number="02"
+      number="04"
       eyebrow="Engineering Approach"
       title="Make the important boundaries visible."
-      description="These principles recur in the implementation choices above; they are not claims detached from the work."
+      description="Recurring principles behind the implementation choices above — not claims detached from the work."
+      meta="04 PRINCIPLES"
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-2">
         {principles.map((principle, index) => (
-          <article key={principle.title} className="card-elevated p-7 sm:p-8">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center rounded-full border border-border bg-surface-elevated px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground">
-                {String(index + 1).padStart(2, "0")}
+          <article
+            key={principle.title}
+            className="group relative bg-background p-8 transition-colors hover:bg-surface-muted sm:p-10"
+          >
+            <div className="flex items-baseline justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[color:var(--aurora-green)]">
+                / {String(index + 1).padStart(3, "0")}
               </span>
-              <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent-blue" />
+              <span
+                aria-hidden="true"
+                className="h-1 w-1 rounded-full bg-[color:var(--aurora-green)]"
+              />
             </div>
-            <h3 className="mt-6 text-xl font-semibold tracking-tight">{principle.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/80">{principle.description}</p>
-            <p className="mt-6 border-t border-border pt-4 font-mono text-[10px] leading-5 text-muted-foreground">
-              Evidence: {principle.evidence}
+            <h3 className="mt-8 font-display text-3xl italic leading-tight tracking-[-0.015em]">
+              {principle.title}
+            </h3>
+            <p className="mt-5 text-[15px] leading-7 text-foreground/75">
+              {principle.description}
+            </p>
+            <p className="mt-8 border-t border-border pt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              Evidence · {principle.evidence}
             </p>
           </article>
         ))}
@@ -226,31 +255,41 @@ function EngineeringApproach() {
     </Section>
   );
 }
+
+/* ─── CAPABILITY MATRIX ─────────────────────────────── */
 
 function CapabilityMap() {
   return (
     <Section
       id="capabilities"
-      number="03"
-      eyebrow="Engineering Capabilities"
+      number="05"
+      eyebrow="Capabilities & Stack"
       title="What the work demonstrates."
       description="Tools appear as supporting evidence. The organizing layer is the engineering capability they enable."
+      meta="6 DISCIPLINES"
     >
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {capabilities.map((capability) => (
-          <article
-            key={capability.title}
-            className="card-elevated relative overflow-hidden p-6 pt-7"
-          >
-            <span
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-0.5 bg-accent-blue"
-            />
-            <h3 className="text-base font-semibold tracking-tight">{capability.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/80">{capability.description}</p>
-            <p className="mt-5 font-mono text-[10px] leading-5 text-muted-foreground">
-              {capability.evidence.join(" · ")}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {capabilities.map((capability, i) => (
+          <article key={capability.title} className="group relative">
+            <div className="flex items-baseline gap-3">
+              <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[color:var(--aurora-green)]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="h-px flex-1 bg-border" />
+            </div>
+            <h3 className="mt-4 font-display text-2xl italic leading-tight tracking-[-0.01em]">
+              {capability.title}
+            </h3>
+            <p className="mt-4 text-sm leading-6 text-foreground/70">
+              {capability.description}
             </p>
+            <ul className="mt-6 flex flex-wrap gap-1.5">
+              {capability.evidence.map((tech) => (
+                <li key={tech} className="tech-chip">
+                  {tech}
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
@@ -258,33 +297,43 @@ function CapabilityMap() {
   );
 }
 
+/* ─── EXPERIENCE ─────────────────────────────── */
+
 function Experience() {
   return (
     <Section
       id="experience"
-      number="04"
+      number="06"
       eyebrow="Experience & Education"
-      title="Engineering habits formed in operational work."
-      description="The role combined workflow improvement with practical responsibility for the systems people depended on each day."
+      title="Engineering habits, formed in operational work."
+      description="The role combined workflow improvement with practical responsibility for systems people depended on each day."
+      meta="2021 — PRESENT"
     >
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
-        <article className="card-elevated p-7 sm:p-9">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <h3 className="text-xl font-semibold tracking-tight">{experience.role}</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">
-                {experience.company} · {experience.location}
-              </p>
-            </div>
-            <span className="inline-flex w-fit items-center rounded-full border border-border bg-surface-elevated px-2.5 py-1 font-mono text-[10px] text-muted-foreground">
+      <div className="grid gap-12 lg:grid-cols-12">
+        <article className="lg:col-span-8">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 className="font-display text-3xl italic leading-tight tracking-[-0.01em] sm:text-4xl">
+              {experience.role}
+            </h3>
+            <span className="mono-label whitespace-nowrap">
               {experience.period}
             </span>
           </div>
-          <div className="mt-8 grid gap-8 border-t border-border pt-8 sm:grid-cols-3 sm:gap-6">
-            {experience.contributions.map((contribution) => (
+          <p className="mt-2 text-sm text-muted-foreground">
+            {experience.company} · {experience.location}
+          </p>
+          <div className="mt-10 grid gap-10 border-t border-border pt-10 sm:grid-cols-3 sm:gap-6">
+            {experience.contributions.map((contribution, i) => (
               <section key={contribution.title}>
-                <h4 className="section-label text-accent-blue">{contribution.title}</h4>
-                <p className="mt-3 text-sm leading-6 text-foreground/80">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--aurora-green)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h4 className="section-label !text-foreground/85">
+                    {contribution.title}
+                  </h4>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-foreground/75">
                   {contribution.description}
                 </p>
               </section>
@@ -292,15 +341,17 @@ function Experience() {
           </div>
         </article>
 
-        <article className="card-elevated p-7 sm:p-9">
-          <p className="section-label text-accent-blue">Education</p>
-          <h3 className="mt-4 text-xl font-semibold tracking-tight">{profile.education.degree}</h3>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+        <article className="lg:col-span-4">
+          <span className="mono-label">Education</span>
+          <h3 className="mt-4 font-display text-3xl italic leading-tight tracking-[-0.01em]">
+            {profile.education.degree}
+          </h3>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
             {profile.education.school}
             <br />
             {profile.education.graduation}
           </p>
-          <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-foreground/80">
+          <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-foreground/75">
             {profile.education.achievements[0]}
           </p>
         </article>
@@ -309,78 +360,102 @@ function Experience() {
   );
 }
 
+/* ─── CONTACT ─────────────────────────────── */
+
 function Contact() {
   return (
-    <Section
+    <section
       id="contact"
-      number="05"
-      eyebrow="Contact"
-      title="Continue the technical conversation."
-      description="Open to UK graduate and new-grad software engineering opportunities from September 2026."
+      className="relative scroll-mt-24 py-32 sm:py-40"
     >
-      <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr]">
-        <div className="grid gap-3 sm:grid-cols-2">
-          <ContactLink
-            href={`mailto:${profile.email}`}
-            icon={<Mail className="h-4 w-4" />}
-            label="Email"
-            value={profile.email}
-          />
-          <ContactLink
-            href={`tel:${profile.phone.replace(/\s/g, "")}`}
-            icon={<Phone className="h-4 w-4" />}
-            label="Phone"
-            value={profile.phone}
-          />
-          <ContactLink
-            href={profile.linkedin}
-            icon={<Linkedin className="h-4 w-4" />}
-            label="LinkedIn"
-            value="linkedin.com/in/parthrohit"
-            external
-          />
-          <ContactLink
-            href={profile.github}
-            icon={<Github className="h-4 w-4" />}
-            label="GitHub"
-            value="github.com/parthrohit22"
-            external
-          />
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        <div className="ledger mb-16">
+          <span className="ledger-num">§ 07</span>
+          <span className="ledger-title">Collaborate</span>
+          <span className="ledger-dash" aria-hidden="true" />
+          <span className="ledger-meta">Available · Sept 2026</span>
         </div>
 
-        <aside className="card-elevated p-7 sm:p-8">
-          <p className="section-label text-accent-blue">Resume</p>
-          <h3 className="mt-4 text-xl font-semibold tracking-tight">
-            Concise background and selected work.
-          </h3>
-          <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            The PDF remains the single source of truth for education, experience, capabilities, and
-            contact details.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-2.5">
-            <Magnetic>
-              <a
-                href="/Parth_Rohit_Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="action-link action-link-primary"
-              >
-                View resume <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a href="/Parth_Rohit_Resume.pdf" download className="action-link">
-                <Download className="h-4 w-4" /> Download PDF
-              </a>
-            </Magnetic>
+        <div className="grid gap-16 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <h2 className="display-lg">
+              Let's talk{" "}
+              <em className="font-display italic text-[color:var(--aurora-green)]">
+                infrastructure
+              </em>
+              , verification, and{" "}
+              <em className="font-display italic text-[color:var(--aurora-violet)]">
+                boundaries
+              </em>
+              .
+            </h2>
+            <p className="body-lg mt-8 max-w-xl">
+              Open to UK graduate and new-grad software engineering opportunities
+              from September 2026. Best reached by email — the resume is the
+              single source of truth for background, experience, and capabilities.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Magnetic>
+                <a href={`mailto:${profile.email}`} className="action-link action-link-primary">
+                  <Mail className="h-3.5 w-3.5" /> Write to me
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a
+                  href="/Parth_Rohit_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="action-link"
+                >
+                  <FileText className="h-3.5 w-3.5" /> View resume
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a href="/Parth_Rohit_Resume.pdf" download className="action-link">
+                  <Download className="h-3.5 w-3.5" /> Download PDF
+                </a>
+              </Magnetic>
+            </div>
           </div>
-        </aside>
+
+          <aside className="lg:col-span-5">
+            <ul className="divide-y divide-border border-y border-border">
+              <ContactRow
+                href={`mailto:${profile.email}`}
+                icon={<Mail className="h-4 w-4" />}
+                label="Email"
+                value={profile.email}
+              />
+              <ContactRow
+                href={`tel:${profile.phone.replace(/\s/g, "")}`}
+                icon={<Phone className="h-4 w-4" />}
+                label="Phone"
+                value={profile.phone}
+              />
+              <ContactRow
+                href={profile.linkedin}
+                icon={<Linkedin className="h-4 w-4" />}
+                label="LinkedIn"
+                value="linkedin.com/in/parthrohit"
+                external
+              />
+              <ContactRow
+                href={profile.github}
+                icon={<Github className="h-4 w-4" />}
+                label="GitHub"
+                value="github.com/parthrohit22"
+                external
+              />
+            </ul>
+          </aside>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
-function ContactLink({
+function ContactRow({
   href,
   icon,
   label,
@@ -394,23 +469,25 @@ function ContactLink({
   external?: boolean;
 }) {
   return (
-    <a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
-      className="card-elevated group flex min-w-0 items-center gap-4 p-5"
-    >
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-border bg-surface-elevated text-accent-blue">
-        {icon}
-      </span>
-      <span className="min-w-0">
-        <span className="section-label block">{label}</span>
-        <span className="mt-1 block truncate text-sm font-medium">{value}</span>
-      </span>
-      <ArrowUpRight
-        className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
-        aria-hidden="true"
-      />
-    </a>
+    <li>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+        className="editorial-row group flex items-center gap-5 py-5"
+      >
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-border text-[color:var(--aurora-green)]">
+          {icon}
+        </span>
+        <div className="min-w-0 flex-1">
+          <span className="mono-label block">{label}</span>
+          <span className="mt-1 block truncate text-[15px] font-medium">{value}</span>
+        </div>
+        <ArrowUpRight
+          className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[color:var(--aurora-green)]"
+          aria-hidden="true"
+        />
+      </a>
+    </li>
   );
 }
