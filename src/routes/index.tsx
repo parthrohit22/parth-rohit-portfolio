@@ -164,7 +164,9 @@ function Hero() {
           </div>
 
           <div className="reveal-up" style={{ animationDelay: "120ms" }}>
-            <HeroVisual />
+            <Tilt max={5} lift={4} scale={1.005}>
+              <HeroVisual />
+            </Tilt>
           </div>
         </div>
       </div>
