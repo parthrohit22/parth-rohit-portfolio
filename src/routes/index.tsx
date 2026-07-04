@@ -358,17 +358,21 @@ function Contact() {
             contact details.
           </p>
           <div className="mt-7 flex flex-wrap gap-2.5">
-            <a
-              href="/Parth_Rohit_Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="action-link action-link-primary"
-            >
-              View resume <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a href="/Parth_Rohit_Resume.pdf" download className="action-link">
-              <Download className="h-4 w-4" /> Download PDF
-            </a>
+            <Magnetic>
+              <a
+                href="/Parth_Rohit_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="action-link action-link-primary"
+              >
+                View resume <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a href="/Parth_Rohit_Resume.pdf" download className="action-link">
+                <Download className="h-4 w-4" /> Download PDF
+              </a>
+            </Magnetic>
           </div>
         </aside>
       </div>
