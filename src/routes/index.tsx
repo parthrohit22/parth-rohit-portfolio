@@ -108,10 +108,7 @@ function Hero() {
               >
                 reliable
               </span>{" "}
-              as systems{" "}
-              <em className="font-serif italic font-normal text-[color:var(--accent-violet)]">
-                grow.
-              </em>
+              as systems <span className="text-[color:var(--accent-violet)]">grow.</span>
             </h1>
 
             <p className="body-lg mt-8 max-w-xl">
