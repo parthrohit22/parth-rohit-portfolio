@@ -1,6 +1,8 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { caseStudies } from "@/lib/portfolio-data";
 import { useReveal } from "@/hooks/use-reveal";
+import { Tilt } from "@/components/tilt";
+import { Magnetic } from "@/components/magnetic";
 
 const FEATURED_META: Record<
   string,
@@ -57,9 +59,11 @@ export function FeaturedShowcase() {
               Three systems worth studying.
             </h2>
           </div>
-          <a href="#work" className="action-link hidden sm:inline-flex">
-            All work <ArrowUpRight className="h-4 w-4" />
-          </a>
+          <Magnetic>
+            <a href="#work" className="action-link hidden sm:inline-flex">
+              All work <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </Magnetic>
         </div>
 
         <div
@@ -67,9 +71,13 @@ export function FeaturedShowcase() {
           className="reveal grid gap-5 md:grid-cols-2 md:grid-rows-[auto_auto] md:[&>*:first-child]:row-span-2"
         >
           {/* Hero tile */}
-          <FeaturedTile caseStudy={hero} meta={heroMeta} size="hero" />
+          <Tilt max={4} lift={6} className="h-full">
+            <FeaturedTile caseStudy={hero} meta={heroMeta} size="hero" />
+          </Tilt>
           {supporting.map((cs) => (
-            <FeaturedTile key={cs.id} caseStudy={cs} meta={FEATURED_META[cs.id]} size="compact" />
+            <Tilt key={cs.id} max={5} lift={5} className="h-full">
+              <FeaturedTile caseStudy={cs} meta={FEATURED_META[cs.id]} size="compact" />
+            </Tilt>
           ))}
         </div>
       </div>
@@ -90,11 +98,12 @@ function FeaturedTile({
   return (
     <a
       href={`#${caseStudy.id}`}
-      className="featured-tile group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all sm:p-8"
+      className="featured-tile group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-8"
       style={{ ["--project-accent" as string]: meta.accent }}
       aria-label={`${caseStudy.name} — ${meta.tagline}`}
     >
       <TileBackdrop hero={isHero} />
+      <span aria-hidden="true" className="tile-sheen" />
 
       <header className="relative flex items-center justify-between gap-3">
         <span
