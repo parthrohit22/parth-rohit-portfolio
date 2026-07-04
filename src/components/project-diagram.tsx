@@ -115,7 +115,7 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent-blue)" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--project-accent, var(--accent-blue))" />
           </marker>
           <pattern id={patternId} width="24" height="24" patternUnits="userSpaceOnUse">
             <circle cx="1" cy="1" r="0.75" fill="var(--border)" opacity="0.7" />
@@ -179,7 +179,7 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
               width="3"
               height={NODE_HEIGHT}
               rx="1.5"
-              fill="var(--accent-blue)"
+              fill="var(--project-accent, var(--accent-blue))"
             />
             <text
               x={node.x - NODE_WIDTH / 2 + 14}
