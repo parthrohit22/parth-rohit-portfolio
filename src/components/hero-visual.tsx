@@ -57,10 +57,10 @@ export function HeroVisual() {
   return (
     <div
       ref={wrapRef}
-      className="hero-visual relative aspect-[3/2] w-full overflow-hidden rounded-2xl border border-border bg-[color:var(--surface-elevated)]"
+      className="hero-visual relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border"
       style={{
         background:
-          "radial-gradient(ellipse at top left, color-mix(in oklab, var(--accent-blue) 22%, transparent), transparent 55%), radial-gradient(ellipse at bottom right, color-mix(in oklab, var(--accent-violet) 20%, transparent), transparent 55%), linear-gradient(180deg, var(--surface-elevated), var(--surface-muted))",
+          "radial-gradient(ellipse at 20% 15%, color-mix(in oklab, var(--accent-blue) 26%, transparent), transparent 55%), radial-gradient(ellipse at 85% 90%, color-mix(in oklab, var(--accent-violet) 22%, transparent), transparent 55%), linear-gradient(180deg, oklch(0.22 0.04 258), oklch(0.18 0.03 258))",
       }}
       aria-hidden="true"
     >
@@ -68,8 +68,8 @@ export function HeroVisual() {
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-500"
         style={{
-          opacity: pointer.active ? 1 : 0.55,
-          background: `radial-gradient(220px circle at ${pointer.x * 100}% ${pointer.y * 100}%, color-mix(in oklab, var(--accent-blue) 32%, transparent), transparent 65%)`,
+          opacity: pointer.active ? 1 : 0.5,
+          background: `radial-gradient(240px circle at ${pointer.x * 100}% ${pointer.y * 100}%, color-mix(in oklab, var(--accent-blue) 34%, transparent), transparent 65%)`,
         }}
       />
       {/* Grid */}
