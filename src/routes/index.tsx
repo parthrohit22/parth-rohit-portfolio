@@ -85,8 +85,9 @@ function Index() {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
+      <CursorGlow />
       <SiteHeader />
-      <main id="main-content">
+      <main id="main-content" className="pt-20 sm:pt-24">
         <Hero />
         <FeaturedShowcase />
         <SelectedWork />
