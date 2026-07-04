@@ -98,11 +98,12 @@ function FeaturedTile({
   return (
     <a
       href={`#${caseStudy.id}`}
-      className="featured-tile group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all sm:p-8"
+      className="featured-tile group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-8"
       style={{ ["--project-accent" as string]: meta.accent }}
       aria-label={`${caseStudy.name} — ${meta.tagline}`}
     >
       <TileBackdrop hero={isHero} />
+      <span aria-hidden="true" className="tile-sheen" />
 
       <header className="relative flex items-center justify-between gap-3">
         <span
