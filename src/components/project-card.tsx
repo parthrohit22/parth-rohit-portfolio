@@ -3,15 +3,15 @@ import { ProjectDiagram } from "@/components/project-diagram";
 import type { EngineeringCaseStudy } from "@/lib/portfolio-data";
 
 const projectAccents: Record<string, { accent: string; label: string }> = {
-  lyta: { accent: "oklch(0.62 0.19 245)", label: "Edge · Stateful" },
-  kalyx: { accent: "oklch(0.6 0.18 285)", label: "Integrity · Verification" },
-  "payment-routing": { accent: "oklch(0.62 0.16 165)", label: "Backend · Authorization" },
-  fieldsight: { accent: "oklch(0.62 0.17 220)", label: "Cloud · Azure" },
-  "find-job-api": { accent: "oklch(0.66 0.16 60)", label: "API · Contracts" },
-  openshield: { accent: "oklch(0.6 0.19 25)", label: "Security · Compliance" },
+  lyta: { accent: "oklch(0.84 0.18 155)", label: "Edge · Stateful" },
+  kalyx: { accent: "oklch(0.72 0.17 300)", label: "Integrity · Verification" },
+  "payment-routing": { accent: "oklch(0.82 0.12 200)", label: "Backend · Authorization" },
+  fieldsight: { accent: "oklch(0.78 0.14 220)", label: "Cloud · Azure" },
+  "find-job-api": { accent: "oklch(0.82 0.14 90)", label: "API · Contracts" },
+  openshield: { accent: "oklch(0.74 0.16 30)", label: "Security · Compliance" },
 };
 
-const defaultAccent = { accent: "oklch(0.56 0.2 260)", label: "Systems" };
+const defaultAccent = { accent: "oklch(0.84 0.18 155)", label: "Systems" };
 
 export function EngineeringCaseStudyCard({
   caseStudy,
