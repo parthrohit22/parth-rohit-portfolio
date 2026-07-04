@@ -71,11 +71,11 @@ export function FeaturedShowcase() {
           className="reveal grid gap-5 md:grid-cols-2 md:grid-rows-[auto_auto] md:[&>*:first-child]:row-span-2"
         >
           {/* Hero tile */}
-          <Tilt max={4} lift={6}>
+          <Tilt max={4} lift={6} className="h-full">
             <FeaturedTile caseStudy={hero} meta={heroMeta} size="hero" />
           </Tilt>
           {supporting.map((cs) => (
-            <Tilt key={cs.id} max={5} lift={5}>
+            <Tilt key={cs.id} max={5} lift={5} className="h-full">
               <FeaturedTile caseStudy={cs} meta={FEATURED_META[cs.id]} size="compact" />
             </Tilt>
           ))}
