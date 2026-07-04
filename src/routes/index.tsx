@@ -159,9 +159,9 @@ function SelectedWork() {
     <Section
       id="work"
       number="01"
-      eyebrow="Selected Engineering Work"
-      title="Architecture, constraints, and decisions—not feature inventories."
-      description="Six systems examined through the problem they address, the boundaries they establish, and the tradeoffs their repositories make visible."
+      eyebrow="All Work"
+      title="Six systems, in depth."
+      description="Each case study opens with the problem and boundary it makes explicit. Deeper tradeoffs, decisions, and technologies expand progressively."
     >
       <div className="space-y-10 sm:space-y-14">
         {caseStudies.map((caseStudy, index) => (
