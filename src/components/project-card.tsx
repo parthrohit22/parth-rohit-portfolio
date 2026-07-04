@@ -17,17 +17,16 @@ export function EngineeringCaseStudyCard({
     <article
       id={caseStudy.id}
       aria-labelledby={headingId}
-      className="scroll-mt-24 border-t border-border py-16 first:border-t-0 first:pt-0 sm:py-24"
+      className="card-elevated scroll-mt-24 p-6 sm:p-10 lg:p-12"
     >
       <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
-        <div className="max-w-3xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-blue">
-            Engineering Case Study {String(index + 1).padStart(2, "0")} /{" "}
-            {String(total).padStart(2, "0")}
-          </p>
+        <div className="min-w-0 max-w-3xl">
+          <span className="inline-flex items-center rounded-full border border-border bg-surface-elevated px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-accent-blue">
+            Case Study {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </span>
           <h3
             id={headingId}
-            className="mt-3 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl"
+            className="mt-4 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl"
           >
             {caseStudy.name}
           </h3>
@@ -55,19 +54,27 @@ export function EngineeringCaseStudyCard({
       </header>
 
       {caseStudy.contribution && (
-        <div className="mt-8 border-l-2 border-accent-blue bg-surface-muted px-5 py-4 text-sm leading-6 text-foreground/80">
-          <strong className="font-semibold text-foreground">Contribution boundary.</strong>{" "}
-          {caseStudy.contribution}
+        <div className="mt-10 rounded-lg border border-border bg-surface-muted p-5 sm:p-6">
+          <div className="flex gap-4">
+            <div
+              aria-hidden="true"
+              className="w-0.5 shrink-0 rounded-full bg-accent-blue"
+            />
+            <p className="text-sm leading-6 text-foreground/80">
+              <strong className="font-semibold text-foreground">Contribution boundary.</strong>{" "}
+              {caseStudy.contribution}
+            </p>
+          </div>
         </div>
       )}
 
-      <section aria-label={`${caseStudy.name} implementation evidence`} className="mt-10">
+      <section aria-label={`${caseStudy.name} implementation evidence`} className="mt-12">
         <h4 className="section-label">Implementation evidence</h4>
-        <ul className="mt-4 grid gap-3 lg:grid-cols-3">
+        <ul className="mt-5 grid gap-3 lg:grid-cols-3">
           {caseStudy.evidence.map((item) => (
             <li
               key={item}
-              className="border-l border-border pl-4 text-sm leading-6 text-foreground/75"
+              className="rounded-lg border border-border bg-surface-elevated p-4 text-sm leading-6 text-foreground/80 transition-colors hover:border-accent-blue/40"
             >
               {item}
             </li>
@@ -75,28 +82,28 @@ export function EngineeringCaseStudyCard({
         </ul>
       </section>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
         <section>
           <h4 className="section-label">Problem</h4>
-          <p className="mt-3 text-[15px] leading-7 text-foreground/80">{caseStudy.problem}</p>
+          <p className="mt-4 text-[15px] leading-7 text-foreground/80">{caseStudy.problem}</p>
         </section>
         <section>
           <h4 className="section-label">Why it matters</h4>
-          <p className="mt-3 text-[15px] leading-7 text-foreground/80">{caseStudy.significance}</p>
+          <p className="mt-4 text-[15px] leading-7 text-foreground/80">{caseStudy.significance}</p>
         </section>
       </div>
 
-      <section className="mt-12">
+      <section className="mt-14">
         <h4 className="section-label">Architecture</h4>
-        <div className="mt-4">
+        <div className="mt-5">
           <ProjectDiagram caseStudy={caseStudy} />
         </div>
       </section>
 
-      <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-12">
+      <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
         <section>
           <h4 className="section-label">Technical challenges</h4>
-          <ul className="mt-4 space-y-3">
+          <ul className="mt-5 space-y-3.5">
             {caseStudy.challenges.map((challenge) => (
               <li key={challenge} className="detail-list-item">
                 {challenge}
@@ -106,7 +113,7 @@ export function EngineeringCaseStudyCard({
         </section>
         <section>
           <h4 className="section-label">Tradeoffs</h4>
-          <ul className="mt-4 space-y-3">
+          <ul className="mt-5 space-y-3.5">
             {caseStudy.tradeoffs.map((tradeoff) => (
               <li key={tradeoff} className="detail-list-item">
                 {tradeoff}
@@ -116,39 +123,51 @@ export function EngineeringCaseStudyCard({
         </section>
       </div>
 
-      <section className="mt-12 border-y border-border py-5">
+      <section className="mt-14">
         <h4 className="section-label">Supporting technologies</h4>
-        <p className="mt-3 font-mono text-xs leading-6 text-foreground/70">
-          {caseStudy.technologies.join(" · ")}
-        </p>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {caseStudy.technologies.map((tech) => (
+            <li key={tech} className="tech-chip">
+              {tech}
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="mt-12" aria-label={`${caseStudy.name} engineering decisions`}>
+      <section className="mt-14" aria-label={`${caseStudy.name} engineering decisions`}>
         <h4 className="section-label">Engineering Decision Highlights</h4>
         <div
-          className={`mt-4 grid gap-4 ${caseStudy.decisions.length > 1 ? "lg:grid-cols-2" : ""}`}
+          className={`mt-5 grid gap-4 ${caseStudy.decisions.length > 1 ? "lg:grid-cols-2" : ""}`}
         >
-          {caseStudy.decisions.map((decision) => (
-            <div key={decision.choice} className="border border-border bg-card p-5 sm:p-6">
-              <h5 className="text-base font-semibold tracking-tight">{decision.choice}</h5>
-              <dl className="mt-5 space-y-4 text-sm leading-6">
+          {caseStudy.decisions.map((decision, decisionIndex) => (
+            <div
+              key={decision.choice}
+              className="rounded-lg border border-border bg-surface-elevated p-6 transition-colors hover:border-accent-blue/40"
+            >
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 font-mono text-[10px] text-muted-foreground">
+                  {String(decisionIndex + 1).padStart(2, "0")}
+                </span>
+                <h5 className="text-base font-semibold tracking-tight">{decision.choice}</h5>
+              </div>
+              <dl className="mt-6 space-y-5 text-sm leading-6">
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-wider text-accent-blue">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent-blue">
                     Why this fits
                   </dt>
-                  <dd className="mt-1 text-foreground/75">{decision.rationale}</dd>
+                  <dd className="mt-1.5 text-foreground/80">{decision.rationale}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     Why not the obvious alternative
                   </dt>
-                  <dd className="mt-1 text-foreground/75">{decision.rejectedAlternative}</dd>
+                  <dd className="mt-1.5 text-foreground/80">{decision.rejectedAlternative}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     Consequence
                   </dt>
-                  <dd className="mt-1 text-foreground/75">{decision.consequence}</dd>
+                  <dd className="mt-1.5 text-foreground/80">{decision.consequence}</dd>
                 </div>
               </dl>
             </div>

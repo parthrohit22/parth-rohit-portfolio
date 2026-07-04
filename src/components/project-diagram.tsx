@@ -5,7 +5,7 @@ import type {
 } from "@/lib/portfolio-data";
 
 const NODE_WIDTH = 172;
-const NODE_HEIGHT = 60;
+const NODE_HEIGHT = 64;
 
 function edgeCoordinates(edge: ArchitectureEdge, nodes: Map<string, ArchitectureNode>) {
   const from = nodes.get(edge.from);
@@ -27,7 +27,7 @@ function edgeCoordinates(edge: ArchitectureEdge, nodes: Map<string, Architecture
     x2: to.x - dx * scale,
     y2: to.y - dy * scale,
     labelX: (from.x + to.x) / 2,
-    labelY: Math.abs(dy) < 10 ? from.y - NODE_HEIGHT / 2 - 8 : (from.y + to.y) / 2 - 8,
+    labelY: Math.abs(dy) < 10 ? from.y - NODE_HEIGHT / 2 - 10 : (from.y + to.y) / 2 - 8,
   };
 }
 
@@ -35,40 +35,49 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
   const { architecture } = caseStudy;
   const nodes = new Map(architecture.nodes.map((node) => [node.id, node]));
   const markerId = `${caseStudy.id}-architecture-arrow`;
+  const patternId = `${caseStudy.id}-architecture-grid`;
   const titleId = `${caseStudy.id}-architecture-title`;
   const descriptionId = `${caseStudy.id}-architecture-description`;
 
   return (
-    <figure className="border border-border bg-surface-muted/55 p-4 sm:p-6">
-      <figcaption className="mb-5 max-w-3xl text-sm leading-6 text-muted-foreground">
+    <figure
+      className="overflow-hidden rounded-xl border border-border"
+      style={{ background: "var(--gradient-diagram-bg)" }}
+    >
+      <figcaption className="border-b border-border/70 px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
         {architecture.caption}
       </figcaption>
 
-      <div className="sm:hidden">
-        <ol className="space-y-2" aria-label={`${caseStudy.name} architecture flow`}>
+      <div className="p-5 sm:hidden">
+        <ol
+          className="relative space-y-3 border-l border-border pl-6"
+          aria-label={`${caseStudy.name} architecture flow`}
+        >
           {architecture.edges.map((edge, index) => {
             const from = nodes.get(edge.from);
             const to = nodes.get(edge.to);
             if (!from || !to) return null;
 
             return (
-              <li
-                key={`${edge.from}-${edge.to}`}
-                className="grid grid-cols-[1.5rem_1fr] gap-2 border-l border-border py-1 pl-3 text-sm"
-              >
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {String(index + 1).padStart(2, "0")}
+              <li key={`${edge.from}-${edge.to}`} className="relative text-sm">
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[27px] top-1.5 grid h-4 w-4 place-items-center rounded-full border border-border bg-card font-mono text-[9px] text-accent-blue"
+                >
+                  {index + 1}
                 </span>
-                <span>
+                <div>
                   <strong className="font-medium text-foreground">{from.label}</strong>
                   <span className="mx-2 text-accent-blue" aria-hidden="true">
                     →
                   </span>
                   <strong className="font-medium text-foreground">{to.label}</strong>
-                  {edge.label && (
-                    <span className="ml-2 text-xs text-muted-foreground">{edge.label}</span>
-                  )}
-                </span>
+                </div>
+                {edge.label && (
+                  <div className="mt-0.5 font-mono text-[11px] text-muted-foreground">
+                    {edge.label}
+                  </div>
+                )}
               </li>
             );
           })}
@@ -76,7 +85,7 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
       </div>
 
       <svg
-        viewBox="0 0 1000 340"
+        viewBox="0 0 1000 380"
         className="hidden h-auto w-full sm:block"
         role="img"
         aria-labelledby={`${titleId} ${descriptionId}`}
@@ -95,7 +104,12 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
           >
             <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent-blue)" />
           </marker>
+          <pattern id={patternId} width="24" height="24" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.75" fill="var(--border)" opacity="0.7" />
+          </pattern>
         </defs>
+
+        <rect width="1000" height="380" fill={`url(#${patternId})`} />
 
         <g className="text-accent-blue">
           {architecture.edges.map((edge) => {
@@ -110,8 +124,10 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
                   x2={coordinates.x2}
                   y2={coordinates.y2}
                   stroke="currentColor"
-                  strokeWidth="1.5"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
                   markerEnd={`url(#${markerId})`}
+                  opacity="0.85"
                 />
                 {edge.label && (
                   <text
@@ -119,10 +135,10 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
                     y={coordinates.labelY}
                     textAnchor="middle"
                     fontFamily="ui-monospace, monospace"
-                    fontSize="10"
+                    fontSize="10.5"
                     fill="currentColor"
-                    stroke="var(--surface-muted)"
-                    strokeWidth="4"
+                    stroke="var(--surface-elevated)"
+                    strokeWidth="5"
                     paintOrder="stroke"
                   >
                     {edge.label}
@@ -140,26 +156,33 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
               y={node.y - NODE_HEIGHT / 2}
               width={NODE_WIDTH}
               height={NODE_HEIGHT}
-              rx="6"
+              rx="8"
               fill="var(--card)"
               stroke="var(--border)"
             />
-            <circle cx={node.x - 67} cy={node.y} r="3" fill="var(--accent-blue)" />
+            <rect
+              x={node.x - NODE_WIDTH / 2}
+              y={node.y - NODE_HEIGHT / 2}
+              width="3"
+              height={NODE_HEIGHT}
+              rx="1.5"
+              fill="var(--accent-blue)"
+            />
             <text
-              x={node.x - 56}
-              y={node.y - 4}
+              x={node.x - NODE_WIDTH / 2 + 14}
+              y={node.y - 5}
               fontFamily="Inter, ui-sans-serif, sans-serif"
-              fontSize="12"
+              fontSize="12.5"
               fontWeight="600"
               fill="var(--foreground)"
             >
               {node.label}
             </text>
             <text
-              x={node.x - 56}
-              y={node.y + 13}
+              x={node.x - NODE_WIDTH / 2 + 14}
+              y={node.y + 14}
               fontFamily="ui-monospace, monospace"
-              fontSize="9.5"
+              fontSize="10"
               fill="var(--muted-foreground)"
             >
               {node.detail}
