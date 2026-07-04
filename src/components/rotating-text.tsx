@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
 const PHRASES = [
-  "Software Engineer",
-  "Building Distributed Systems",
-  "Designing Reliable Backend Platforms",
-  "Cloud-Native Applications",
-  "Security Engineering",
-  "State Management",
-  "System Design",
+  "distributed systems",
+  "reliable backends",
+  "cloud-native platforms",
+  "security tooling",
+  "stateful edge workspaces",
+  "verifiable data systems",
 ];
 
 export function RotatingText({ interval = 2400 }: { interval?: number }) {
@@ -28,21 +27,23 @@ export function RotatingText({ interval = 2400 }: { interval?: number }) {
     return () => clearInterval(id);
   }, [interval, reduced]);
 
+  const longest = PHRASES.reduce((a, b) => (a.length >= b.length ? a : b));
+
   return (
     <span
-      className="rotating-text relative inline-block align-baseline"
+      className="rotating-text relative inline-flex align-baseline"
       aria-live="polite"
       aria-atomic="true"
     >
-      {/* Invisible longest phrase to reserve width */}
+      {/* Invisible longest phrase reserves exact width — no layout shift */}
       <span aria-hidden="true" className="invisible whitespace-nowrap">
-        Designing Reliable Backend Platforms
+        {longest}
       </span>
       {PHRASES.map((p, idx) => (
         <span
           key={p}
           aria-hidden={idx !== i}
-          className="rotating-text__item"
+          className="rotating-text__item whitespace-nowrap"
           data-active={idx === i}
         >
           {p}
