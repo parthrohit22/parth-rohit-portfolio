@@ -201,6 +201,7 @@ function SelectedWork() {
   return (
     <Section
       id="work"
+      number="01"
       eyebrow="Selected Engineering Work"
       title="Architecture, constraints, and decisions—not feature inventories."
       description="Six systems examined through the problem they address, the boundaries they establish, and the tradeoffs their repositories make visible."
@@ -223,6 +224,7 @@ function EngineeringApproach() {
   return (
     <Section
       id="approach"
+      number="02"
       eyebrow="Engineering Approach"
       title="Make the important boundaries visible."
       description="These principles recur in the implementation choices above; they are not claims detached from the work."
@@ -252,6 +254,7 @@ function CapabilityMap() {
   return (
     <Section
       id="capabilities"
+      number="03"
       eyebrow="Engineering Capabilities"
       title="What the work demonstrates."
       description="Tools appear as supporting evidence. The organizing layer is the engineering capability they enable."
@@ -282,6 +285,7 @@ function Experience() {
   return (
     <Section
       id="experience"
+      number="04"
       eyebrow="Experience & Education"
       title="Engineering habits formed in operational work."
       description="The role combined workflow improvement with practical responsibility for the systems people depended on each day."
@@ -332,6 +336,7 @@ function Contact() {
   return (
     <Section
       id="contact"
+      number="05"
       eyebrow="Contact"
       title="Continue the technical conversation."
       description="Open to UK graduate and new-grad software engineering opportunities from September 2026."
