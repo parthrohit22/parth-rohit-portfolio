@@ -41,61 +41,69 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.985 0.004 260);
-  --foreground: oklch(0.16 0.03 265);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.03 265);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0.03 265);
-  --primary: oklch(0.2 0.04 265);
-  --primary-foreground: oklch(0.985 0.003 255);
-  --secondary: oklch(0.96 0.007 255);
-  --secondary-foreground: oklch(0.22 0.035 260);
-  --muted: oklch(0.96 0.007 255);
-  --muted-foreground: oklch(0.48 0.02 265);
-  --accent: oklch(0.94 0.025 253);
-  --accent-foreground: oklch(0.25 0.08 258);
-  --destructive: oklch(0.58 0.22 27);
-  --destructive-foreground: oklch(0.985 0.003 255);
-  --border: oklch(0.9 0.012 260);
-  --input: oklch(0.9 0.012 260);
-  --ring: oklch(0.55 0.19 258);
-  --surface: oklch(0.975 0.005 260);
-  --surface-muted: oklch(0.955 0.008 260);
-  --surface-elevated: oklch(0.998 0.002 260);
-  --accent-blue: oklch(0.56 0.2 260);
-  --accent-blue-soft: color-mix(in oklab, var(--accent-blue) 14%, transparent);
-  --accent-cyan: oklch(0.78 0.13 215);
-  --accent-violet: oklch(0.62 0.2 290);
+  color-scheme: dark;
+  --radius: 0.75rem;
 
-  --shadow-sm: 0 1px 2px color-mix(in oklab, var(--foreground) 7%, transparent);
-  --shadow-card: 0 1px 2px color-mix(in oklab, var(--foreground) 6%, transparent),
-    0 12px 32px -18px color-mix(in oklab, var(--foreground) 22%, transparent);
-  --shadow-card-hover: 0 1px 2px color-mix(in oklab, var(--foreground) 7%, transparent),
-    0 24px 56px -22px color-mix(in oklab, var(--accent-blue) 38%, transparent);
-  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--ring) 30%, transparent);
-  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent-blue) 25%, transparent),
-    0 20px 60px -20px color-mix(in oklab, var(--accent-blue) 50%, transparent);
+  /* Midnight Indigo palette — #0a0a1a / #141432 / #1e1e5a / #4f46e5 */
+  --background: oklch(0.14 0.035 275);
+  --foreground: oklch(0.97 0.008 260);
+  --card: oklch(0.19 0.055 275);
+  --card-foreground: oklch(0.97 0.008 260);
+  --popover: oklch(0.19 0.055 275);
+  --popover-foreground: oklch(0.97 0.008 260);
+  --primary: oklch(0.62 0.22 275);
+  --primary-foreground: oklch(0.14 0.035 275);
+  --secondary: oklch(0.22 0.065 275);
+  --secondary-foreground: oklch(0.97 0.008 260);
+  --muted: oklch(0.22 0.055 275);
+  --muted-foreground: oklch(0.72 0.03 265);
+  --accent: oklch(0.28 0.09 275);
+  --accent-foreground: oklch(0.97 0.008 260);
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.98 0.005 255);
+  --border: oklch(0.29 0.09 275);
+  --input: oklch(0.29 0.09 275);
+  --ring: oklch(0.62 0.22 275);
+  --surface: oklch(0.17 0.045 275);
+  --surface-muted: oklch(0.19 0.055 275);
+  --surface-elevated: oklch(0.22 0.065 275);
+  --accent-blue: oklch(0.66 0.2 275);
+  --accent-blue-soft: color-mix(in oklab, var(--accent-blue) 18%, transparent);
+  --accent-cyan: oklch(0.78 0.14 215);
+  --accent-violet: oklch(0.68 0.22 295);
+
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.35);
+  --shadow-card:
+    0 1px 0 color-mix(in oklab, white 4%, transparent) inset,
+    0 1px 2px oklch(0 0 0 / 0.4),
+    0 20px 48px -24px oklch(0 0 0 / 0.6);
+  --shadow-card-hover:
+    0 1px 0 color-mix(in oklab, white 6%, transparent) inset,
+    0 1px 2px oklch(0 0 0 / 0.45),
+    0 28px 72px -20px color-mix(in oklab, var(--accent-blue) 55%, transparent);
+  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--ring) 45%, transparent);
+  --shadow-glow:
+    0 0 0 1px color-mix(in oklab, var(--accent-blue) 35%, transparent),
+    0 24px 64px -20px color-mix(in oklab, var(--accent-blue) 60%, transparent);
 
   --gradient-hero:
-    radial-gradient(60% 55% at 12% 8%, color-mix(in oklab, var(--accent-blue) 22%, transparent) 0%, transparent 60%),
-    radial-gradient(45% 40% at 95% 0%, color-mix(in oklab, var(--accent-violet) 18%, transparent) 0%, transparent 60%),
-    radial-gradient(50% 45% at 80% 90%, color-mix(in oklab, var(--accent-cyan) 20%, transparent) 0%, transparent 60%);
+    radial-gradient(60% 55% at 10% 5%, color-mix(in oklab, var(--accent-blue) 32%, transparent) 0%, transparent 60%),
+    radial-gradient(45% 40% at 95% 0%, color-mix(in oklab, var(--accent-violet) 28%, transparent) 0%, transparent 60%),
+    radial-gradient(50% 45% at 80% 90%, color-mix(in oklab, var(--accent-cyan) 18%, transparent) 0%, transparent 60%);
   --gradient-diagram-bg: radial-gradient(
       ellipse at top,
-      color-mix(in oklab, var(--accent-blue) 8%, transparent),
+      color-mix(in oklab, var(--accent-blue) 14%, transparent),
       transparent 60%
     ),
     linear-gradient(180deg, var(--surface-elevated), var(--surface-muted));
   --gradient-text: linear-gradient(
     135deg,
     var(--foreground) 0%,
-    color-mix(in oklab, var(--foreground) 55%, var(--accent-blue)) 60%,
+    color-mix(in oklab, var(--foreground) 55%, var(--accent-blue)) 55%,
     var(--accent-blue) 100%
   );
 
-  --grid-color: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --grid-color: color-mix(in oklab, var(--accent-blue) 12%, transparent);
 }
 
 @layer base {
