@@ -3,15 +3,15 @@ import { ProjectDiagram } from "@/components/project-diagram";
 import type { EngineeringCaseStudy } from "@/lib/portfolio-data";
 
 const projectAccents: Record<string, { accent: string; label: string }> = {
-  lyta: { accent: "oklch(0.62 0.19 245)", label: "Edge · Stateful" },
-  kalyx: { accent: "oklch(0.6 0.18 285)", label: "Integrity · Verification" },
-  "payment-routing": { accent: "oklch(0.62 0.16 165)", label: "Backend · Authorization" },
-  fieldsight: { accent: "oklch(0.62 0.17 220)", label: "Cloud · Azure" },
-  "find-job-api": { accent: "oklch(0.66 0.16 60)", label: "API · Contracts" },
-  openshield: { accent: "oklch(0.6 0.19 25)", label: "Security · Compliance" },
+  lyta: { accent: "oklch(0.84 0.18 155)", label: "Edge · Stateful" },
+  kalyx: { accent: "oklch(0.72 0.17 300)", label: "Integrity · Verification" },
+  "payment-routing": { accent: "oklch(0.82 0.12 200)", label: "Backend · Authorization" },
+  fieldsight: { accent: "oklch(0.78 0.14 220)", label: "Cloud · Azure" },
+  "find-job-api": { accent: "oklch(0.82 0.14 90)", label: "API · Contracts" },
+  openshield: { accent: "oklch(0.74 0.16 30)", label: "Security · Compliance" },
 };
 
-const defaultAccent = { accent: "oklch(0.56 0.2 260)", label: "Systems" };
+const defaultAccent = { accent: "oklch(0.84 0.18 155)", label: "Systems" };
 
 export function EngineeringCaseStudyCard({
   caseStudy,
@@ -68,12 +68,12 @@ export function EngineeringCaseStudyCard({
             </div>
             <h3
               id={headingId}
-              className="mt-4 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl lg:text-[2.75rem]"
+              className="mt-5 font-display text-4xl italic leading-[0.98] tracking-[-0.02em] sm:text-5xl lg:text-6xl"
             >
               {caseStudy.name}
             </h3>
-            <p className="mt-4 text-lg leading-8 text-foreground/80">{caseStudy.positioning}</p>
-            <p className="mt-4 font-mono text-[11px] leading-5 text-muted-foreground">
+            <p className="mt-5 text-lg leading-8 font-light text-foreground/80">{caseStudy.positioning}</p>
+            <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               {caseStudy.domains.join(" · ")}
             </p>
           </div>
@@ -217,11 +217,11 @@ export function EngineeringCaseStudyCard({
                       className="absolute left-0 top-6 h-8 w-0.5 rounded-r"
                       style={{ background: "var(--project-accent)" }}
                     />
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5 font-mono text-[10px] text-muted-foreground">
+                    <div className="flex items-baseline gap-3">
+                      <span className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                         {String(decisionIndex + 1).padStart(2, "0")}
                       </span>
-                      <h5 className="text-base font-semibold tracking-tight">
+                      <h5 className="font-display text-2xl italic leading-tight tracking-[-0.01em]">
                         {decision.choice}
                       </h5>
                     </div>

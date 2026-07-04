@@ -43,26 +43,34 @@ export function SiteHeader() {
       data-scrolled={scrolled}
       className="site-header fixed inset-x-0 top-3 sm:top-4 z-50 flex justify-center px-3 sm:px-4 transition-all duration-500 ease-out data-[hidden=true]:-translate-y-[130%] data-[hidden=true]:opacity-0"
     >
-      <div className="site-header__pill flex h-14 w-full max-w-4xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/60 pl-3 pr-2 backdrop-blur-xl backdrop-saturate-150 shadow-[0_10px_40px_-20px_oklch(0_0_0/0.6)]">
+      <div className="site-header__pill flex h-14 w-full max-w-4xl items-center justify-between gap-3 rounded-full border border-border/70 bg-background/60 pl-4 pr-2 backdrop-blur-xl backdrop-saturate-150 shadow-[0_10px_40px_-20px_oklch(0_0_0/0.7)]">
         <a
           href="#top"
-          className="group flex items-center gap-2.5 rounded-full pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="group flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <span
             aria-hidden="true"
-            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-gradient-to-br from-surface-elevated to-surface-muted font-mono text-[11px] font-semibold text-accent-blue shadow-sm"
+            className="font-display text-2xl italic leading-none text-[color:var(--aurora-green)]"
+            style={{ transform: "translateY(1px)" }}
           >
-            PR
+            P.
           </span>
-          <span className="hidden text-sm font-semibold tracking-tight text-foreground sm:inline">
-            {profile.name}
+          <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-foreground sm:inline">
+            Parth Rohit
           </span>
         </a>
 
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <a key={item.href} href={item.href} className="nav-link rounded-full">
-              {item.label}
+          {navigation.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="nav-link flex items-center gap-2 rounded-full"
+            >
+              <span className="text-[color:var(--aurora-green)]/70">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span>{item.label}</span>
             </a>
           ))}
         </nav>
@@ -72,7 +80,7 @@ export function SiteHeader() {
             href="/Parth_Rohit_Resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="action-link action-link-primary hidden h-10 min-h-10 rounded-full px-4 py-1.5 text-xs sm:inline-flex"
+            className="action-link action-link-primary hidden h-10 min-h-10 rounded-full px-4 py-1.5 text-[10px] sm:inline-flex"
           >
             Resume
           </a>
