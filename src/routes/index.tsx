@@ -7,10 +7,11 @@ import {
   Github,
   Linkedin,
   Mail,
-  MapPin,
   Phone,
 } from "lucide-react";
 import { EngineeringCaseStudyCard } from "@/components/project-card";
+import { FeaturedShowcase } from "@/components/featured-showcase";
+import { HeroVisual } from "@/components/hero-visual";
 import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
