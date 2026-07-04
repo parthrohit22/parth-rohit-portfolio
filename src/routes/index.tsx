@@ -55,7 +55,6 @@ function Index() {
       <SiteHeader />
       <main id="main-content" className="pt-24 sm:pt-28">
         <Hero />
-        <SystemPlate />
         <FeaturedShowcase />
         <AllSystems />
         <EngineeringApproach />
@@ -74,49 +73,62 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative scroll-mt-24 overflow-hidden pb-24 pt-8 sm:pb-32"
+      className="relative scroll-mt-24 overflow-hidden pb-28 pt-6 sm:pb-36"
     >
-      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+      {/* Living atmosphere */}
+      <div className="hero-canvas" aria-hidden="true">
+        <div className="hero-orb hero-orb--a" />
+        <div className="hero-orb hero-orb--b" />
+        <div className="hero-orb hero-orb--c" />
+        <div className="hero-grid" />
+        <div className="hero-noise" />
+        <div className="hero-scanline" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-10">
         {/* Colophon rule */}
-        <div className="ledger mb-16 sm:mb-20">
+        <div className="ledger mb-14 sm:mb-16">
           <span className="ledger-num">§ 01</span>
-          <span className="ledger-title">Portfolio Vol. 03</span>
+          <span className="ledger-title">Portfolio · 2026</span>
           <span className="ledger-dash" aria-hidden="true" />
-          <span className="ledger-meta">Engineering journal · Est. 2026</span>
+          <span className="ledger-meta inline-flex items-center gap-2">
+            <span className="status-dot" aria-hidden="true" /> Open to graduate roles · UK
+          </span>
         </div>
 
-        <div className="reveal-up grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
-          <div className="lg:col-span-8">
+        <div className="reveal-up grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+          <div className="lg:col-span-7">
             <p className="eyebrow mb-8">Software Engineer · {profile.location}</p>
 
             <h1 className="display-xl text-balance">
-              Engineering{" "}
-              <em className="not-italic font-display text-[color:var(--aurora-green)]">
-                resilient
+              I build software that stays{" "}
+              <span
+                className="bg-clip-text text-transparent"
+                style={{ backgroundImage: "var(--gradient-text)" }}
+              >
+                reliable
+              </span>{" "}
+              as systems{" "}
+              <em className="font-serif italic font-normal text-[color:var(--accent-violet)]">
+                grow.
               </em>
-              <br />
-              architectures.
             </h1>
-          </div>
 
-          <div className="border-l border-border pl-6 sm:pl-8 lg:col-span-4 lg:pb-6">
-            <p className="body-lg">
-              A software engineer building around{" "}
-              <span className="text-[color:var(--aurora-green)] not-italic">
-                explicit state ownership
-              </span>
-              , deterministic verification, and{" "}
-              <span className="text-[color:var(--aurora-violet)] not-italic">
-                enforceable API boundaries
-              </span>
-              . Distributed edge workspaces, hash-linked evidence ledgers,
-              role-scoped backend authority, and merged cloud-security work.
+            <p className="body-lg mt-8 max-w-xl">
+              A software engineer working across{" "}
+              <span className="text-foreground">backend services</span>,{" "}
+              <span className="text-foreground">cloud infrastructure</span>, and
+              the{" "}
+              <span className="text-foreground">APIs</span> that hold them
+              together. I care about clear state ownership, secure boundaries,
+              and systems that keep behaving well as they scale — with recent
+              work in distributed edge platforms and cloud-security tooling.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-2.5">
+            <div className="mt-10 flex flex-wrap items-center gap-3">
               <Magnetic>
-                <a href="#featured" className="action-link action-link-primary">
-                  Explore systems <ArrowRight className="h-3.5 w-3.5" />
+                <a href="#featured" className="action-link action-link-hero">
+                  Explore my work <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               </Magnetic>
               <Magnetic>
@@ -129,56 +141,45 @@ function Hero() {
                   <Github className="h-3.5 w-3.5" /> GitHub
                 </a>
               </Magnetic>
+              <Magnetic>
+                <a href="#contact" className="action-link">
+                  <Mail className="h-3.5 w-3.5" /> Get in touch
+                </a>
+              </Magnetic>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              <span className="inline-flex items-center gap-2">
-                <span className="status-dot" aria-hidden="true" />
-                {profile.availability}
-              </span>
-              <span className="opacity-40" aria-hidden="true">
-                /
-              </span>
-              <span>{profile.education.degree}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── SYSTEM PLATE (hero visual as magazine figure) ─────────────────────────────── */
-
-function SystemPlate() {
-  return (
-    <section
-      aria-labelledby="plate-heading"
-      className="relative py-20 sm:py-24"
-    >
-      <div className="mx-auto max-w-7xl px-6 sm:px-10">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
-          <div className="lg:col-span-4">
-            <span className="mono-label">Fig. I / System Plate</span>
-            <h2
-              id="plate-heading"
-              className="mt-4 font-display text-3xl italic leading-tight sm:text-4xl"
-            >
-              How a stateful edge workspace assigns ownership.
-            </h2>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-foreground/70">
-              Requests resolve identity at a Worker Router, then coordinate work
-              across purpose-specific Durable Objects. Each boundary is a state
-              contract, not a shared blob.
-            </p>
-            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
-              Adapted · LYTA architecture
-            </p>
+            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <div>
+                <dt className="opacity-60">Focus</dt>
+                <dd className="mt-2 font-sans text-[13px] normal-case tracking-normal text-foreground/85">
+                  Backend · Cloud · Security
+                </dd>
+              </div>
+              <div>
+                <dt className="opacity-60">Studying</dt>
+                <dd className="mt-2 font-sans text-[13px] normal-case tracking-normal text-foreground/85">
+                  {profile.education.degree}
+                </dd>
+              </div>
+              <div>
+                <dt className="opacity-60">Status</dt>
+                <dd className="mt-2 font-sans text-[13px] normal-case tracking-normal text-foreground/85">
+                  {profile.availability}
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          <div className="lg:col-span-8">
-            <div className="glass-panel overflow-hidden rounded-lg p-2 sm:p-3">
-              <HeroVisual />
+          <div className="lg:col-span-5">
+            <div className="relative">
+              <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-[color:var(--accent-blue)]/20 via-transparent to-[color:var(--accent-violet)]/20 blur-2xl" />
+              <div className="glass-panel relative overflow-hidden rounded-2xl p-2 sm:p-3">
+                <HeroVisual />
+              </div>
+              <p className="mono-label mt-4 flex items-center justify-between">
+                <span>Fig. I / Live topology</span>
+                <span className="opacity-60">requests · ownership · authority</span>
+              </p>
             </div>
           </div>
         </div>
@@ -186,6 +187,7 @@ function SystemPlate() {
     </section>
   );
 }
+
 
 /* ─── ALL SYSTEMS ─────────────────────────────── */
 
