@@ -497,6 +497,31 @@
   }
 }
 
+@utility tile-sheen {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 320ms ease;
+  background: radial-gradient(
+    220px circle at calc(var(--tilt-mx, 0.5) * 100%) calc(var(--tilt-my, 0.5) * 100%),
+    color-mix(in oklab, var(--project-accent, var(--accent-blue)) 22%, transparent),
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+}
+
+.tilt-zone:hover .tile-sheen,
+.featured-tile:hover .tile-sheen {
+  opacity: 1;
+}
+
+.tilt-zone {
+  display: block;
+  transform-style: preserve-3d;
+}
+
 @utility rail-number {
   display: inline-flex;
   align-items: center;
