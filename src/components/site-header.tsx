@@ -46,7 +46,7 @@ export function SiteHeader() {
           </summary>
           <nav
             aria-label="Mobile navigation"
-            className="absolute right-0 top-13 w-64 rounded-lg border border-border bg-card p-2 shadow-lg"
+            className="absolute right-0 top-14 w-64 rounded-lg border border-border bg-card p-2 shadow-lg"
           >
             {navigation.map((item) => (
               <a key={item.href} href={item.href} className="mobile-nav-link">
