@@ -239,7 +239,7 @@ function EngineeringApproach() {
                 className="h-1 w-1 rounded-full bg-[color:var(--aurora-green)]"
               />
             </div>
-            <h3 className="mt-8 font-display text-3xl italic leading-tight tracking-[-0.015em]">
+            <h3 className="mt-8 text-2xl font-semibold leading-tight tracking-[-0.015em]">
               {principle.title}
             </h3>
             <p className="mt-5 text-[15px] leading-7 text-foreground/75">
@@ -276,7 +276,7 @@ function CapabilityMap() {
               </span>
               <div className="h-px flex-1 bg-border" />
             </div>
-            <h3 className="mt-4 font-display text-2xl italic leading-tight tracking-[-0.01em]">
+            <h3 className="mt-4 text-xl font-semibold leading-tight tracking-[-0.01em]">
               {capability.title}
             </h3>
             <p className="mt-4 text-sm leading-6 text-foreground/70">
@@ -311,7 +311,7 @@ function Experience() {
       <div className="grid gap-12 lg:grid-cols-12">
         <article className="lg:col-span-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 className="font-display text-3xl italic leading-tight tracking-[-0.01em] sm:text-4xl">
+            <h3 className="text-2xl font-semibold leading-tight tracking-[-0.015em] sm:text-3xl">
               {experience.role}
             </h3>
             <span className="mono-label whitespace-nowrap">
@@ -342,7 +342,7 @@ function Experience() {
 
         <article className="lg:col-span-4">
           <span className="mono-label">Education</span>
-          <h3 className="mt-4 font-display text-3xl italic leading-tight tracking-[-0.01em]">
+          <h3 className="mt-4 text-2xl font-semibold leading-tight tracking-[-0.015em]">
             {profile.education.degree}
           </h3>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
