@@ -122,9 +122,10 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     background-image:
-      radial-gradient(70% 55% at 8% -5%, color-mix(in oklab, var(--aurora-green) 12%, transparent), transparent 60%),
-      radial-gradient(60% 55% at 105% 12%, color-mix(in oklab, var(--aurora-violet) 14%, transparent), transparent 60%),
-      radial-gradient(55% 60% at 50% 105%, color-mix(in oklab, var(--aurora-violet) 10%, transparent), transparent 65%);
+      radial-gradient(60% 45% at 12% -8%, color-mix(in oklab, var(--accent-blue) 22%, transparent), transparent 60%),
+      radial-gradient(50% 45% at 100% 8%, color-mix(in oklab, var(--accent-violet) 20%, transparent), transparent 62%),
+      radial-gradient(55% 55% at 50% 108%, color-mix(in oklab, var(--accent-blue) 12%, transparent), transparent 65%),
+      linear-gradient(180deg, oklch(0.18 0.03 258) 0%, var(--background) 40%, oklch(0.17 0.028 258) 100%);
     background-attachment: fixed;
   }
 
