@@ -17,6 +17,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { RotatingText } from "@/components/rotating-text";
 import { CursorGlow } from "@/components/cursor-glow";
+import { Magnetic } from "@/components/magnetic";
 import { capabilities, caseStudies, experience, principles, profile } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
