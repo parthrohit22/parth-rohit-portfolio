@@ -59,9 +59,11 @@ export function FeaturedShowcase() {
               Three systems worth studying.
             </h2>
           </div>
-          <a href="#work" className="action-link hidden sm:inline-flex">
-            All work <ArrowUpRight className="h-4 w-4" />
-          </a>
+          <Magnetic>
+            <a href="#work" className="action-link hidden sm:inline-flex">
+              All work <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </Magnetic>
         </div>
 
         <div
@@ -69,9 +71,13 @@ export function FeaturedShowcase() {
           className="reveal grid gap-5 md:grid-cols-2 md:grid-rows-[auto_auto] md:[&>*:first-child]:row-span-2"
         >
           {/* Hero tile */}
-          <FeaturedTile caseStudy={hero} meta={heroMeta} size="hero" />
+          <Tilt max={4} lift={6}>
+            <FeaturedTile caseStudy={hero} meta={heroMeta} size="hero" />
+          </Tilt>
           {supporting.map((cs) => (
-            <FeaturedTile key={cs.id} caseStudy={cs} meta={FEATURED_META[cs.id]} size="compact" />
+            <Tilt key={cs.id} max={5} lift={5}>
+              <FeaturedTile caseStudy={cs} meta={FEATURED_META[cs.id]} size="compact" />
+            </Tilt>
           ))}
         </div>
       </div>
