@@ -7,10 +7,11 @@ import {
   Github,
   Linkedin,
   Mail,
-  MapPin,
   Phone,
 } from "lucide-react";
 import { EngineeringCaseStudyCard } from "@/components/project-card";
+import { FeaturedShowcase } from "@/components/featured-showcase";
+import { HeroVisual } from "@/components/hero-visual";
 import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -85,6 +86,7 @@ function Index() {
       <SiteHeader />
       <main id="main-content">
         <Hero />
+        <FeaturedShowcase />
         <SelectedWork />
         <EngineeringApproach />
         <CapabilityMap />
@@ -101,19 +103,24 @@ function Hero() {
     <section id="top" className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28 lg:py-36">
       <div aria-hidden="true" className="hero-backdrop" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:items-center lg:gap-16">
           <div className="reveal-up">
             <p className="eyebrow">
-              <span>{profile.role}</span>
+              <span>Software Engineer</span>
               <span aria-hidden="true" className="opacity-40">/</span>
               <span>{profile.location}</span>
             </p>
-            <h1 className="display-xl mt-6 max-w-4xl text-balance">{profile.statement}</h1>
-            <p className="body-lg mt-7 max-w-2xl">{profile.supporting}</p>
+            <h1 className="display-xl mt-6 max-w-4xl text-balance">
+              I build systems with explicit ownership, verifiable state, and enforceable boundaries.
+            </h1>
+            <p className="body-lg mt-7 max-w-xl">
+              Distributed edge workspaces, hash-linked evidence integrity, role-scoped backend
+              authority, and merged cloud-security work.
+            </p>
 
             <div className="mt-10 flex flex-wrap gap-2.5">
-              <a href="#work" className="action-link action-link-primary">
-                Selected Engineering Work <ArrowRight className="h-4 w-4" />
+              <a href="#featured" className="action-link action-link-primary">
+                Explore featured systems <ArrowRight className="h-4 w-4" />
               </a>
               <a href={profile.github} target="_blank" rel="noreferrer" className="action-link">
                 <Github className="h-4 w-4" /> GitHub
@@ -128,69 +135,19 @@ function Hero() {
               </a>
             </div>
 
-            <dl className="mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border text-xs text-muted-foreground sm:grid-cols-2">
-              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3.5">
-                <MapPin className="h-3.5 w-3.5 shrink-0 text-accent-blue" aria-hidden="true" />
-                <dt className="sr-only">Location</dt>
-                <dd className="truncate">{profile.location}</dd>
-              </div>
-              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3.5">
-                <span className="status-dot shrink-0" aria-hidden="true" />
-                <dt className="sr-only">Availability</dt>
-                <dd className="truncate">{profile.availability}</dd>
-              </div>
-              <div className="bg-surface-elevated px-4 py-3.5">
-                <dt className="sr-only">Education</dt>
-                <dd className="truncate">{profile.education.degree}</dd>
-              </div>
-              <div className="bg-surface-elevated px-4 py-3.5">
-                <dt className="sr-only">Graduation</dt>
-                <dd className="truncate">{profile.education.graduation}</dd>
-              </div>
-            </dl>
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+              <span className="inline-flex items-center gap-2">
+                <span className="status-dot" aria-hidden="true" />
+                {profile.availability}
+              </span>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span>{profile.education.degree}</span>
+            </div>
           </div>
 
-          <aside
-            aria-labelledby="evidence-heading"
-            className="card-elevated card-glow p-6 sm:p-7"
-          >
-            <div className="flex items-center justify-between border-b border-border pb-4">
-              <h2 id="evidence-heading" className="section-label">
-                Evidence before claims
-              </h2>
-              <span className="font-mono text-[10px] text-muted-foreground">01—04</span>
-            </div>
-            <ol className="divide-y divide-border">
-              {proofPoints.map((item, index) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className="group -mx-2 grid grid-cols-[2rem_1fr_auto] gap-3 rounded-md px-2 py-4 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
-                  >
-                    <span className="font-mono text-[10px] text-accent-blue">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span>
-                      <strong className="block text-sm font-semibold tracking-tight">
-                        {item.label}
-                      </strong>
-                      <span className="mt-1.5 block text-xs leading-5 text-muted-foreground">
-                        {item.evidence}
-                      </span>
-                    </span>
-                    <ArrowUpRight
-                      className="mt-0.5 h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-5 text-xs leading-5 text-muted-foreground">
-              Each case study links to the implementation and source documentation behind its
-              claims.
-            </p>
-          </aside>
+          <div className="reveal-up" style={{ animationDelay: "120ms" }}>
+            <HeroVisual />
+          </div>
         </div>
       </div>
     </section>
@@ -202,9 +159,9 @@ function SelectedWork() {
     <Section
       id="work"
       number="01"
-      eyebrow="Selected Engineering Work"
-      title="Architecture, constraints, and decisions—not feature inventories."
-      description="Six systems examined through the problem they address, the boundaries they establish, and the tradeoffs their repositories make visible."
+      eyebrow="All Work"
+      title="Six systems, in depth."
+      description="Each case study opens with the problem and boundary it makes explicit. Deeper tradeoffs, decisions, and technologies expand progressively."
     >
       <div className="space-y-10 sm:space-y-14">
         {caseStudies.map((caseStudy, index) => (
