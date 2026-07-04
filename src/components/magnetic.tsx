@@ -33,6 +33,7 @@ export function Magnetic({
     let raf = 0;
     let tx = 0;
     let ty = 0;
+    let active = false;
 
     const apply = () => {
       target.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
@@ -45,29 +46,38 @@ export function Magnetic({
       const cy = r.top + r.height / 2;
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
-      const dist = Math.hypot(dx, dy);
-      if (dist > radius + Math.max(r.width, r.height) / 2) {
+      const halfW = r.width / 2;
+      const halfH = r.height / 2;
+      // distance from cursor to nearest edge of the button rect
+      const edgeX = Math.max(0, Math.abs(dx) - halfW);
+      const edgeY = Math.max(0, Math.abs(dy) - halfH);
+      const edgeDist = Math.hypot(edgeX, edgeY);
+      if (edgeDist > radius) {
+        if (!active) return;
+        active = false;
         tx = 0;
         ty = 0;
       } else {
-        tx = dx * strength;
-        ty = dy * strength;
+        active = true;
+        const falloff = 1 - edgeDist / radius;
+        tx = dx * strength * falloff;
+        ty = dy * strength * falloff;
       }
       if (!raf) raf = requestAnimationFrame(apply);
     };
 
     const onLeave = () => {
+      active = false;
       tx = 0;
       ty = 0;
       if (!raf) raf = requestAnimationFrame(apply);
     };
 
-    const zone = wrap;
-    zone.addEventListener("pointermove", onMove);
-    zone.addEventListener("pointerleave", onLeave);
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerleave", onLeave);
     return () => {
-      zone.removeEventListener("pointermove", onMove);
-      zone.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
       if (raf) cancelAnimationFrame(raf);
       target.style.transform = "";
       target.style.transition = "";
