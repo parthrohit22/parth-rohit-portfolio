@@ -76,7 +76,7 @@ export function HeroVisual() {
       <svg
         viewBox="0 0 600 400"
         className="absolute inset-0 h-full w-full"
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           <pattern id="hv-grid" width="24" height="24" patternUnits="userSpaceOnUse">
