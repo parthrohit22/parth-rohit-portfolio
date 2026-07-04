@@ -249,11 +249,18 @@ function CapabilityMap() {
       title="What the work demonstrates."
       description="Tools appear as supporting evidence. The organizing layer is the engineering capability they enable."
     >
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((capability) => (
-          <article key={capability.title} className="border-t border-foreground pt-5">
+          <article
+            key={capability.title}
+            className="card-elevated relative overflow-hidden p-6 pt-7"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-0.5 bg-accent-blue"
+            />
             <h3 className="text-base font-semibold tracking-tight">{capability.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/75">{capability.description}</p>
+            <p className="mt-3 text-sm leading-6 text-foreground/80">{capability.description}</p>
             <p className="mt-5 font-mono text-[10px] leading-5 text-muted-foreground">
               {capability.evidence.join(" · ")}
             </p>
