@@ -1,33 +1,37 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-type Node = { id: string; label: string; x: number; y: number; group: "edge" | "core" | "data" };
-type Edge = { from: string; to: string };
+type Domain = {
+  id: string;
+  label: string;
+  short: string;
+  angle: number; // degrees, 0 = right, clockwise
+  radius: number;
+};
 
-const NODES: Node[] = [
-  { id: "b", label: "browser", x: 60, y: 200, group: "edge" },
-  { id: "r", label: "router", x: 210, y: 200, group: "core" },
-  { id: "a", label: "auth", x: 360, y: 110, group: "core" },
-  { id: "w", label: "workspace", x: 360, y: 200, group: "core" },
-  { id: "c", label: "conversation", x: 360, y: 290, group: "core" },
-  { id: "ai1", label: "workers ai", x: 520, y: 155, group: "data" },
-  { id: "ai2", label: "workers ai", x: 520, y: 245, group: "data" },
+// Eight engineering domains arranged around a central "Software Engineering" node.
+const DOMAINS: Domain[] = [
+  { id: "backend", label: "Backend Systems", short: "backend", angle: -90, radius: 150 },
+  { id: "distributed", label: "Distributed Systems", short: "distributed", angle: -45, radius: 155 },
+  { id: "cloud", label: "Cloud Platforms", short: "cloud", angle: 0, radius: 150 },
+  { id: "api", label: "API Design", short: "api", angle: 45, radius: 155 },
+  { id: "observability", label: "Observability", short: "observability", angle: 90, radius: 150 },
+  { id: "data", label: "Data Engineering", short: "data", angle: 135, radius: 155 },
+  { id: "security", label: "Security Engineering", short: "security", angle: 180, radius: 150 },
+  { id: "integrity", label: "Execution Integrity", short: "integrity", angle: 225, radius: 155 },
 ];
 
-const EDGES: Edge[] = [
-  { from: "b", to: "r" },
-  { from: "r", to: "a" },
-  { from: "r", to: "w" },
-  { from: "r", to: "c" },
-  { from: "w", to: "ai1" },
-  { from: "c", to: "ai2" },
-];
+const CENTER = { x: 300, y: 210 };
+const CORE_ID = "core";
 
-// Auto-cycled activation sequence — mimics an inbound request flowing through the graph.
-const AUTO_SEQUENCE = ["b", "r", "w", "ai1", "c", "ai2", "a"];
+function polar(cx: number, cy: number, r: number, deg: number) {
+  const rad = (deg * Math.PI) / 180;
+  return { x: cx + Math.cos(rad) * r, y: cy + Math.sin(rad) * r };
+}
 
 /**
- * Living topology. Nodes activate in a request-shaped wave; hover any node
- * to route an ad-hoc request from the browser through it and downstream.
+ * Engineering-ecosystem topology. A central "Software Engineering" node radiates
+ * into eight connected domains. Nodes gently activate in a slow wave; hovering
+ * a domain lights its edge and pulses the core.
  */
 export function HeroVisual() {
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -39,12 +43,8 @@ export function HeroVisual() {
     const el = wrapRef.current;
     if (!el) return;
     const onMove = (e: PointerEvent) => {
-      const rect = el.getBoundingClientRect();
-      setPointer({
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height,
-        active: true,
-      });
+      const r = el.getBoundingClientRect();
+      setPointer({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, active: true });
     };
     const onLeave = () => {
       setPointer((p) => ({ ...p, active: false }));
@@ -58,57 +58,19 @@ export function HeroVisual() {
     };
   }, []);
 
-  // Auto-activation wave (paused on hover)
   useEffect(() => {
     if (hoverId) return;
-    const t = setInterval(() => setAutoIdx((i) => (i + 1) % AUTO_SEQUENCE.length), 900);
+    const t = setInterval(() => setAutoIdx((i) => (i + 1) % DOMAINS.length), 1400);
     return () => clearInterval(t);
   }, [hoverId]);
 
-  const byId = useMemo(() => new Map(NODES.map((n) => [n.id, n])), []);
-  const adjacency = useMemo(() => {
-    const m = new Map<string, string[]>();
-    for (const e of EDGES) {
-      if (!m.has(e.from)) m.set(e.from, []);
-      m.get(e.from)!.push(e.to);
-    }
-    return m;
-  }, []);
+  const positions = useMemo(
+    () => DOMAINS.map((d) => ({ ...d, ...polar(CENTER.x, CENTER.y, d.radius, d.angle) })),
+    []
+  );
 
-  // Compute the currently "live" path — hovered subtree, or auto wave.
-  const liveNodes = useMemo(() => {
-    if (hoverId) {
-      // Trace from browser → hovered → all downstream
-      const path = new Set<string>(["b"]);
-      // BFS to hovered (only need to include ancestors along the r → hovered path)
-      // simple: mark hovered + all reachable downstream, plus router as bridge.
-      path.add("r");
-      path.add(hoverId);
-      const stack = [hoverId];
-      while (stack.length) {
-        const cur = stack.pop()!;
-        for (const nx of adjacency.get(cur) ?? []) {
-          if (!path.has(nx)) {
-            path.add(nx);
-            stack.push(nx);
-          }
-        }
-      }
-      return path;
-    }
-    return new Set<string>([AUTO_SEQUENCE[autoIdx]]);
-  }, [hoverId, autoIdx, adjacency]);
-
-  const liveEdges = useMemo(() => {
-    const s = new Set<string>();
-    for (const e of EDGES) {
-      if (liveNodes.has(e.from) && liveNodes.has(e.to)) s.add(`${e.from}-${e.to}`);
-    }
-    return s;
-  }, [liveNodes]);
-
-  const spotlightX = pointer.x * 600;
-  const spotlightY = pointer.y * 400;
+  const activeId = hoverId ?? DOMAINS[autoIdx].id;
+  const activeDomain = positions.find((p) => p.id === activeId);
 
   return (
     <div
@@ -116,127 +78,112 @@ export function HeroVisual() {
       className="hero-visual relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border"
       style={{
         background:
-          "radial-gradient(ellipse at 20% 15%, color-mix(in oklab, var(--accent-blue) 26%, transparent), transparent 55%), radial-gradient(ellipse at 85% 90%, color-mix(in oklab, var(--accent-violet) 22%, transparent), transparent 55%), linear-gradient(180deg, oklch(0.22 0.04 258), oklch(0.18 0.03 258))",
+          "radial-gradient(ellipse at 50% 50%, color-mix(in oklab, var(--accent-blue) 22%, transparent), transparent 60%), radial-gradient(ellipse at 85% 90%, color-mix(in oklab, var(--accent-violet) 18%, transparent), transparent 55%), linear-gradient(180deg, oklch(0.22 0.04 258), oklch(0.18 0.03 258))",
       }}
-      aria-hidden="true"
+      aria-label="Software engineering ecosystem"
     >
       {/* Cursor spotlight */}
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-500"
         style={{
-          opacity: pointer.active ? 1 : 0.5,
-          background: `radial-gradient(240px circle at ${pointer.x * 100}% ${pointer.y * 100}%, color-mix(in oklab, var(--accent-blue) 34%, transparent), transparent 65%)`,
+          opacity: pointer.active ? 1 : 0.55,
+          background: `radial-gradient(280px circle at ${pointer.x * 100}% ${pointer.y * 100}%, color-mix(in oklab, var(--accent-blue) 30%, transparent), transparent 65%)`,
         }}
       />
-      <svg
-        viewBox="0 0 600 400"
-        className="absolute inset-0 h-full w-full"
-        preserveAspectRatio="xMidYMid meet"
-      >
+
+      <svg viewBox="0 0 600 420" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <pattern id="hv-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="color-mix(in oklab, var(--accent-blue) 18%, transparent)" strokeWidth="0.6" />
+          <pattern id="hv-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+            <path d="M 26 0 L 0 0 0 26" fill="none" stroke="color-mix(in oklab, var(--accent-blue) 16%, transparent)" strokeWidth="0.6" />
           </pattern>
           <radialGradient id="hv-mask" cx="50%" cy="50%" r="60%">
             <stop offset="0%" stopColor="white" stopOpacity="1" />
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <mask id="hv-grid-mask">
-            <rect width="600" height="400" fill="url(#hv-mask)" />
+            <rect width="600" height="420" fill="url(#hv-mask)" />
           </mask>
+          <radialGradient id="hv-core" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="var(--accent-blue)" stopOpacity="0.95" />
+            <stop offset="70%" stopColor="var(--accent-violet)" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="var(--accent-violet)" stopOpacity="0.15" />
+          </radialGradient>
           <linearGradient id="hv-line" x1="0" x2="1" y1="0" y2="0">
             <stop offset="0%" stopColor="var(--accent-blue)" stopOpacity="0.15" />
-            <stop offset="50%" stopColor="var(--accent-blue)" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="var(--accent-violet)" stopOpacity="0.7" />
-          </linearGradient>
-          <linearGradient id="hv-line-hot" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stopColor="var(--accent-blue)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="var(--accent-violet)" stopOpacity="1" />
+            <stop offset="60%" stopColor="var(--accent-blue)" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="var(--accent-violet)" stopOpacity="0.6" />
           </linearGradient>
         </defs>
-        <rect width="600" height="400" fill="url(#hv-grid)" mask="url(#hv-grid-mask)" opacity="0.9" />
 
-        {/* Edges */}
+        <rect width="600" height="420" fill="url(#hv-grid)" mask="url(#hv-grid-mask)" opacity="0.85" />
+
+        {/* Orbit rings */}
+        <g fill="none" stroke="color-mix(in oklab, var(--accent-blue) 18%, transparent)" strokeDasharray="2 6">
+          <circle cx={CENTER.x} cy={CENTER.y} r={95} opacity="0.55" />
+          <circle cx={CENTER.x} cy={CENTER.y} r={152} opacity="0.35" />
+          <circle cx={CENTER.x} cy={CENTER.y} r={188} opacity="0.18" />
+        </g>
+
+        {/* Spokes */}
         <g strokeLinecap="round">
-          {EDGES.map((e, i) => {
-            const from = byId.get(e.from)!;
-            const to = byId.get(e.to)!;
-            const key = `${e.from}-${e.to}`;
-            const hot = liveEdges.has(key);
+          {positions.map((d) => {
+            const hot = d.id === activeId;
             return (
-              <g key={key}>
+              <g key={`e-${d.id}`}>
                 <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  stroke={hot ? "url(#hv-line-hot)" : "url(#hv-line)"}
-                  strokeWidth={hot ? 2 : 1.2}
-                  opacity={hot ? 1 : 0.55}
-                  style={{ transition: "opacity 240ms ease, stroke-width 240ms ease" }}
+                  x1={CENTER.x}
+                  y1={CENTER.y}
+                  x2={d.x}
+                  y2={d.y}
+                  stroke="url(#hv-line)"
+                  strokeWidth={hot ? 1.8 : 1}
+                  opacity={hot ? 1 : 0.45}
+                  style={{ transition: "opacity 320ms ease, stroke-width 320ms ease" }}
                 />
                 {hot && (
                   <line
-                    x1={from.x}
-                    y1={from.y}
-                    x2={to.x}
-                    y2={to.y}
+                    x1={CENTER.x}
+                    y1={CENTER.y}
+                    x2={d.x}
+                    y2={d.y}
                     stroke="var(--accent-blue)"
                     strokeWidth={4}
-                    opacity={0.18}
+                    opacity={0.2}
                     style={{ filter: "blur(4px)" }}
                   />
                 )}
-                <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  stroke="var(--accent-blue)"
-                  strokeWidth="1"
-                  strokeDasharray={`${6 + (i % 3)} ${10 + (i % 3)}`}
-                  opacity={hot ? 0.9 : 0.35}
-                  className="hv-flow"
-                  style={{ animationDelay: `${i * 240}ms`, animationDuration: hot ? "1.2s" : "3.2s" }}
-                />
               </g>
             );
           })}
         </g>
 
-        {/* Traveling packets — one per edge, faster on live edges */}
+        {/* Traveling packets on every spoke */}
         <g>
-          {EDGES.map((e, i) => {
-            const from = byId.get(e.from)!;
-            const to = byId.get(e.to)!;
-            const key = `${e.from}-${e.to}`;
-            const hot = liveEdges.has(key);
-            const dur = hot ? 0.9 : 2.6 + (i % 3) * 0.5;
+          {positions.map((d, i) => {
+            const hot = d.id === activeId;
+            const dur = hot ? 1.1 : 3.6 + (i % 4) * 0.4;
             return (
               <circle
-                key={`p-${key}`}
-                r={hot ? 3.4 : 2.4}
+                key={`p-${d.id}`}
+                r={hot ? 3.4 : 2.2}
                 fill={hot ? "var(--accent-violet)" : "var(--accent-blue)"}
-                opacity={hot ? 1 : 0.85}
+                opacity={hot ? 1 : 0.7}
                 style={{
-                  filter: `drop-shadow(0 0 ${hot ? 10 : 6}px color-mix(in oklab, ${hot ? "var(--accent-violet)" : "var(--accent-blue)"} 75%, transparent))`,
+                  filter: `drop-shadow(0 0 ${hot ? 10 : 5}px color-mix(in oklab, ${hot ? "var(--accent-violet)" : "var(--accent-blue)"} 75%, transparent))`,
                 }}
               >
                 <animateMotion
                   dur={`${dur}s`}
                   repeatCount="indefinite"
-                  begin={`${-(i * 0.4)}s`}
-                  path={`M ${from.x} ${from.y} L ${to.x} ${to.y}`}
-                  keyPoints="0;1"
-                  keyTimes="0;1"
-                  calcMode="linear"
+                  begin={`${-(i * 0.35)}s`}
+                  path={`M ${CENTER.x} ${CENTER.y} L ${d.x} ${d.y}`}
                 />
                 <animate
                   attributeName="opacity"
                   values="0;1;1;0"
-                  keyTimes="0;0.1;0.9;1"
+                  keyTimes="0;0.15;0.85;1"
                   dur={`${dur}s`}
-                  begin={`${-(i * 0.4)}s`}
+                  begin={`${-(i * 0.35)}s`}
                   repeatCount="indefinite"
                 />
               </circle>
@@ -244,82 +191,119 @@ export function HeroVisual() {
           })}
         </g>
 
-        {/* Nodes */}
+        {/* Core node — Software Engineering */}
+        <g
+          onPointerEnter={() => setHoverId(CORE_ID)}
+          onPointerLeave={() => setHoverId((h) => (h === CORE_ID ? null : h))}
+          style={{ cursor: "pointer" }}
+        >
+          <circle cx={CENTER.x} cy={CENTER.y} r={70} fill="url(#hv-core)" opacity="0.35" />
+          <circle
+            cx={CENTER.x}
+            cy={CENTER.y}
+            r={54}
+            fill="color-mix(in oklab, var(--card) 92%, transparent)"
+            stroke="color-mix(in oklab, var(--accent-blue) 70%, var(--border))"
+            strokeWidth={1.6}
+          />
+          <circle cx={CENTER.x} cy={CENTER.y} r={62} fill="none" stroke="var(--accent-blue)" strokeWidth={1} opacity={0}>
+            <animate attributeName="r" values="54;78" dur="2.6s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.55;0" dur="2.6s" repeatCount="indefinite" />
+          </circle>
+          <text
+            x={CENTER.x}
+            y={CENTER.y - 4}
+            textAnchor="middle"
+            fontFamily="Inter, ui-sans-serif, sans-serif"
+            fontSize="12"
+            fontWeight="600"
+            fill="var(--foreground)"
+            style={{ letterSpacing: "0.02em" }}
+          >
+            Software
+          </text>
+          <text
+            x={CENTER.x}
+            y={CENTER.y + 12}
+            textAnchor="middle"
+            fontFamily="Inter, ui-sans-serif, sans-serif"
+            fontSize="12"
+            fontWeight="600"
+            fill="var(--foreground)"
+            style={{ letterSpacing: "0.02em" }}
+          >
+            Engineering
+          </text>
+          <text
+            x={CENTER.x}
+            y={CENTER.y + 30}
+            textAnchor="middle"
+            fontFamily="ui-monospace, monospace"
+            fontSize="8.5"
+            fill="color-mix(in oklab, var(--foreground) 55%, transparent)"
+            style={{ letterSpacing: "0.22em", textTransform: "uppercase" }}
+          >
+            · core ·
+          </text>
+        </g>
+
+        {/* Domain nodes */}
         <g>
-          {NODES.map((n, i) => {
-            const dx = spotlightX - n.x;
-            const dy = spotlightY - n.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const magnet = pointer.active ? Math.max(0, 60 - dist) / 60 : 0;
-            const shift = magnet * 6;
-            const tx = n.x + (dx / (dist || 1)) * shift;
-            const ty = n.y + (dy / (dist || 1)) * shift;
-            const live = liveNodes.has(n.id);
-            const hovered = hoverId === n.id;
-            const ring =
-              n.group === "core"
-                ? "var(--accent-blue)"
-                : n.group === "data"
-                ? "var(--accent-violet)"
-                : "color-mix(in oklab, var(--foreground) 55%, var(--border))";
+          {positions.map((d) => {
+            const hot = d.id === activeId;
+            // Compute label anchor: outward-facing text
+            const outward = polar(0, 0, 1, d.angle);
+            const anchor = outward.x > 0.35 ? "start" : outward.x < -0.35 ? "end" : "middle";
+            const labelOffsetX = outward.x * 18;
+            const labelOffsetY = outward.y * 18 + (outward.y > 0.5 ? 4 : outward.y < -0.5 ? -2 : 4);
             return (
               <g
-                key={n.id}
-                transform={`translate(${tx} ${ty})`}
-                className="hv-node"
-                style={{ animationDelay: `${i * 160}ms`, cursor: "pointer" }}
-                onPointerEnter={() => setHoverId(n.id)}
-                onPointerLeave={() => setHoverId((h) => (h === n.id ? null : h))}
+                key={d.id}
+                onPointerEnter={() => setHoverId(d.id)}
+                onPointerLeave={() => setHoverId((h) => (h === d.id ? null : h))}
+                style={{ cursor: "pointer" }}
               >
-                {/* Hit target */}
-                <circle r={28} fill="transparent" pointerEvents="all" />
-                {/* Outer aura on live */}
-                {live && (
+                <circle cx={d.x} cy={d.y} r={22} fill="transparent" pointerEvents="all" />
+                {hot && (
                   <circle
-                    r={26}
+                    cx={d.x}
+                    cy={d.y}
+                    r={16}
                     fill="none"
-                    stroke={ring}
+                    stroke="var(--accent-blue)"
                     strokeWidth={1}
                     opacity={0.55}
-                    style={{
-                      filter: `drop-shadow(0 0 12px color-mix(in oklab, ${ring} 70%, transparent))`,
-                    }}
+                    style={{ filter: "drop-shadow(0 0 10px color-mix(in oklab, var(--accent-blue) 70%, transparent))" }}
                   />
                 )}
                 <circle
-                  r={24}
-                  fill="color-mix(in oklab, var(--card) 92%, transparent)"
-                  stroke={live ? ring : "color-mix(in oklab, var(--foreground) 20%, var(--border))"}
-                  strokeWidth={live ? 2 : 1.4}
-                  opacity={0.98}
-                  style={{ transition: "stroke 220ms ease, stroke-width 220ms ease" }}
-                />
-                <circle
-                  r={hovered ? 9 : 7}
-                  fill={ring}
-                  opacity={live ? 0.95 : 0.35}
+                  cx={d.x}
+                  cy={d.y}
+                  r={hot ? 6.5 : 4.5}
+                  fill={hot ? "var(--accent-violet)" : "var(--accent-blue)"}
+                  opacity={hot ? 1 : 0.75}
                   style={{
-                    filter: `drop-shadow(0 0 ${live ? 10 : 4}px color-mix(in oklab, ${ring} ${live ? 80 : 40}%, transparent))`,
-                    transition: "opacity 220ms ease, r 220ms ease",
+                    filter: `drop-shadow(0 0 ${hot ? 9 : 4}px color-mix(in oklab, ${hot ? "var(--accent-violet)" : "var(--accent-blue)"} 70%, transparent))`,
+                    transition: "r 220ms ease, opacity 220ms ease",
                   }}
                 />
-                {/* Activation ripple */}
-                {live && (
-                  <circle r={12} fill="none" stroke={ring} strokeWidth={1.2} opacity={0}>
-                    <animate attributeName="r" values="12;30" dur="1.2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.7;0" dur="1.2s" repeatCount="indefinite" />
+                {hot && (
+                  <circle cx={d.x} cy={d.y} r={8} fill="none" stroke="var(--accent-blue)" strokeWidth={1}>
+                    <animate attributeName="r" values="8;22" dur="1.4s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.65;0" dur="1.4s" repeatCount="indefinite" />
                   </circle>
                 )}
                 <text
-                  y={42}
-                  textAnchor="middle"
-                  fontFamily="ui-monospace, monospace"
+                  x={d.x + labelOffsetX}
+                  y={d.y + labelOffsetY}
+                  textAnchor={anchor}
+                  fontFamily="Inter, ui-sans-serif, sans-serif"
                   fontSize="10.5"
-                  fontWeight="500"
-                  fill={live ? "var(--foreground)" : "color-mix(in oklab, var(--foreground) 70%, transparent)"}
-                  style={{ letterSpacing: "0.1em", textTransform: "uppercase", transition: "fill 220ms ease" }}
+                  fontWeight={hot ? 600 : 500}
+                  fill={hot ? "var(--foreground)" : "color-mix(in oklab, var(--foreground) 62%, transparent)"}
+                  style={{ letterSpacing: "0.02em", transition: "fill 220ms ease" }}
                 >
-                  {n.label}
+                  {d.label}
                 </text>
               </g>
             );
@@ -330,10 +314,10 @@ export function HeroVisual() {
       {/* Corner meta */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between p-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
         <span className="inline-flex items-center gap-2">
-          <span className="status-dot" />{" "}
-          {hoverId ? `routing → ${byId.get(hoverId)?.label ?? ""}` : "systems.live"}
+          <span className="status-dot" />
+          {activeDomain ? `focus · ${activeDomain.short}` : "ecosystem.live"}
         </span>
-        <span>{hoverId ? "hover · trace request" : "hover a node · trace request"}</span>
+        <span>8 domains · 1 practice</span>
       </div>
     </div>
   );
