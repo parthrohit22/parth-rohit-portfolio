@@ -68,12 +68,12 @@ export function EngineeringCaseStudyCard({
             </div>
             <h3
               id={headingId}
-              className="mt-4 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl lg:text-[2.75rem]"
+              className="mt-5 font-display text-4xl italic leading-[0.98] tracking-[-0.02em] sm:text-5xl lg:text-6xl"
             >
               {caseStudy.name}
             </h3>
-            <p className="mt-4 text-lg leading-8 text-foreground/80">{caseStudy.positioning}</p>
-            <p className="mt-4 font-mono text-[11px] leading-5 text-muted-foreground">
+            <p className="mt-5 text-lg leading-8 font-light text-foreground/80">{caseStudy.positioning}</p>
+            <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               {caseStudy.domains.join(" · ")}
             </p>
           </div>
