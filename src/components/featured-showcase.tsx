@@ -125,10 +125,11 @@ function FeaturedTile({
 
       <div className={`relative ${isHero ? "mt-10" : "mt-8"}`}>
         <h3
+          style={{ fontFamily: "var(--font-display)" }}
           className={
             isHero
-              ? "font-display italic text-5xl leading-[0.95] tracking-[-0.02em] sm:text-6xl"
-              : "font-display italic text-3xl leading-[1] tracking-[-0.015em] sm:text-4xl"
+              ? "text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-foreground sm:text-6xl"
+              : "text-3xl font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-4xl"
           }
         >
           {caseStudy.name}
