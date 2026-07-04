@@ -15,6 +15,8 @@ import { HeroVisual } from "@/components/hero-visual";
 import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { RotatingText } from "@/components/rotating-text";
+import { CursorGlow } from "@/components/cursor-glow";
 import { capabilities, caseStudies, experience, principles, profile } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
@@ -83,8 +85,9 @@ function Index() {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
+      <CursorGlow />
       <SiteHeader />
-      <main id="main-content">
+      <main id="main-content" className="pt-20 sm:pt-24">
         <Hero />
         <FeaturedShowcase />
         <SelectedWork />
@@ -106,12 +109,12 @@ function Hero() {
         <div className="grid gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:items-center lg:gap-16">
           <div className="reveal-up">
             <p className="eyebrow">
-              <span>Software Engineer</span>
+              <span>Parth Rohit</span>
               <span aria-hidden="true" className="opacity-40">/</span>
               <span>{profile.location}</span>
             </p>
             <h1 className="display-xl mt-6 max-w-4xl text-balance">
-              I build systems with explicit ownership, verifiable state, and enforceable boundaries.
+              <RotatingText />
             </h1>
             <p className="body-lg mt-7 max-w-xl">
               Distributed edge workspaces, hash-linked evidence integrity, role-scoped backend
