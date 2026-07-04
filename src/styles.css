@@ -562,3 +562,74 @@
 .project-details[open] > summary {
   background: var(--surface-muted);
 }
+
+/* Scroll-reveal (opt-in via data-revealed) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal[data-revealed="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Featured tiles */
+.featured-tile {
+  box-shadow: var(--shadow-card);
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 320ms ease, box-shadow 320ms ease;
+}
+.featured-tile:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--project-accent, var(--accent-blue)) 55%, var(--border));
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 5%, transparent) inset,
+    0 28px 72px -22px color-mix(in oklab, var(--project-accent, var(--accent-blue)) 55%, transparent);
+}
+.featured-tile:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus), var(--shadow-card);
+}
+
+/* Hero visual dashed flow */
+@keyframes hv-flow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -60; }
+}
+@keyframes hv-node-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hv-flow {
+    animation: hv-flow 3.2s linear infinite;
+  }
+  .hv-node {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: hv-node-in 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+/* Action link subtle magnetic lift already covered; add primary hover glow */
+.action-link-primary {
+  position: relative;
+}
+.action-link-primary::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 14px;
+  background: radial-gradient(60% 100% at 50% 100%, color-mix(in oklab, var(--accent-blue) 45%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  z-index: -1;
+  pointer-events: none;
+}
+.action-link-primary:hover::after {
+  opacity: 0.85;
+}
