@@ -17,6 +17,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { RotatingText } from "@/components/rotating-text";
 import { CursorGlow } from "@/components/cursor-glow";
+import { Magnetic } from "@/components/magnetic";
 import { capabilities, caseStudies, experience, principles, profile } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
@@ -128,21 +129,27 @@ function Hero() {
               authority, and merged cloud-security work.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-2.5">
-              <a href="#featured" className="action-link action-link-primary">
-                Explore featured systems <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href={profile.github} target="_blank" rel="noreferrer" className="action-link">
-                <Github className="h-4 w-4" /> GitHub
-              </a>
-              <a
-                href="/Parth_Rohit_Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="action-link"
-              >
-                <FileText className="h-4 w-4" /> Resume
-              </a>
+            <div className="mt-8 flex flex-wrap items-center gap-2.5">
+              <Magnetic>
+                <a href="#featured" className="action-link action-link-primary">
+                  Explore featured systems <ArrowRight className="h-4 w-4" />
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a href={profile.github} target="_blank" rel="noreferrer" className="action-link">
+                  <Github className="h-4 w-4" /> GitHub
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a
+                  href="/Parth_Rohit_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="action-link"
+                >
+                  <FileText className="h-4 w-4" /> Resume
+                </a>
+              </Magnetic>
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
