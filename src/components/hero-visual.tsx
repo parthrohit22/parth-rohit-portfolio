@@ -222,6 +222,28 @@ export function HeroVisual() {
                     filter: "drop-shadow(0 0 6px color-mix(in oklab, var(--accent-blue) 60%, transparent))",
                   }}
                 />
+                <circle
+                  r={12}
+                  fill="none"
+                  stroke="var(--accent-blue)"
+                  strokeWidth={1}
+                  opacity={0}
+                >
+                  <animate
+                    attributeName="r"
+                    values="10;22"
+                    dur="2.6s"
+                    begin={`${i * 0.35}s`}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0.55;0"
+                    dur="2.6s"
+                    begin={`${i * 0.35}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
                 <text
                   y={42}
                   textAnchor="middle"
