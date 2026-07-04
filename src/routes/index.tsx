@@ -379,14 +379,9 @@ function Contact() {
           <div className="lg:col-span-7">
             <h2 className="display-lg">
               Let's talk{" "}
-              <em className="font-display italic text-[color:var(--aurora-green)]">
-                infrastructure
-              </em>
-              , verification, and{" "}
-              <em className="font-display italic text-[color:var(--aurora-violet)]">
-                boundaries
-              </em>
-              .
+              <span className="text-[color:var(--accent-blue)]">infrastructure</span>,
+              verification, and{" "}
+              <span className="text-[color:var(--accent-violet)]">boundaries</span>.
             </h2>
             <p className="body-lg mt-8 max-w-xl">
               Open to UK graduate and new-grad software engineering opportunities
