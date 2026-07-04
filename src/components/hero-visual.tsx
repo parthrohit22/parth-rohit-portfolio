@@ -142,6 +142,47 @@ export function HeroVisual() {
           })}
         </g>
 
+        {/* Traveling packets */}
+        <g className="hv-packets">
+          {EDGES.map((e, i) => {
+            const from = byId.get(e.from)!;
+            const to = byId.get(e.to)!;
+            const dur = 2.4 + (i % 3) * 0.6;
+            const delay = -(i * 0.5);
+            return (
+              <circle
+                key={`p-${e.from}-${e.to}`}
+                r="2.6"
+                fill="var(--accent-blue)"
+                opacity="0.95"
+                style={{
+                  filter:
+                    "drop-shadow(0 0 6px color-mix(in oklab, var(--accent-blue) 75%, transparent))",
+                }}
+              >
+                <animateMotion
+                  dur={`${dur}s`}
+                  repeatCount="indefinite"
+                  begin={`${delay}s`}
+                  path={`M ${from.x} ${from.y} L ${to.x} ${to.y}`}
+                  keyPoints="0;1"
+                  keyTimes="0;1"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;0.1;0.9;1"
+                  dur={`${dur}s`}
+                  begin={`${delay}s`}
+                  repeatCount="indefinite"
+                />
+              </circle>
+            );
+          })}
+        </g>
+
+
         {/* Nodes */}
         <g>
           {NODES.map((n, i) => {
