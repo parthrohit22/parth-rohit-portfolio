@@ -161,26 +161,34 @@ export function HeroVisual() {
                 style={{ animationDelay: `${i * 160}ms` }}
               >
                 <circle
-                  r={18}
-                  fill="color-mix(in oklab, var(--accent-blue) 8%, var(--card))"
+                  r={24}
+                  fill="var(--card)"
                   stroke={
                     n.group === "core"
                       ? "var(--accent-blue)"
                       : n.group === "data"
                         ? "var(--accent-violet)"
-                        : "color-mix(in oklab, var(--foreground) 40%, var(--border))"
+                        : "color-mix(in oklab, var(--foreground) 55%, var(--border))"
                   }
-                  strokeWidth={1.4}
-                  opacity={0.95}
+                  strokeWidth={1.8}
+                  opacity={0.98}
                 />
-                <circle r={5} fill="var(--accent-blue)" opacity={glow} />
+                <circle
+                  r={7}
+                  fill="var(--accent-blue)"
+                  opacity={glow}
+                  style={{
+                    filter: "drop-shadow(0 0 6px color-mix(in oklab, var(--accent-blue) 60%, transparent))",
+                  }}
+                />
                 <text
-                  y={34}
+                  y={42}
                   textAnchor="middle"
                   fontFamily="ui-monospace, monospace"
-                  fontSize="9.5"
-                  fill="color-mix(in oklab, var(--foreground) 72%, transparent)"
-                  style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}
+                  fontSize="10.5"
+                  fontWeight="500"
+                  fill="color-mix(in oklab, var(--foreground) 85%, transparent)"
+                  style={{ letterSpacing: "0.1em", textTransform: "uppercase" }}
                 >
                   {n.label}
                 </text>
