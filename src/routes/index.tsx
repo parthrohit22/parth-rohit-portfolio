@@ -198,7 +198,7 @@ function SelectedWork() {
       title="Architecture, constraints, and decisions—not feature inventories."
       description="Six systems examined through the problem they address, the boundaries they establish, and the tradeoffs their repositories make visible."
     >
-      <div>
+      <div className="space-y-10 sm:space-y-14">
         {caseStudies.map((caseStudy, index) => (
           <EngineeringCaseStudyCard
             key={caseStudy.id}
