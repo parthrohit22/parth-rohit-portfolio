@@ -279,22 +279,24 @@ function Experience() {
       title="Engineering habits formed in operational work."
       description="The role combined workflow improvement with practical responsibility for the systems people depended on each day."
     >
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
-        <article className="border-t border-foreground pt-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
+        <article className="card-elevated p-7 sm:p-9">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h3 className="text-xl font-semibold tracking-tight">{experience.role}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="mt-1.5 text-sm text-muted-foreground">
                 {experience.company} · {experience.location}
               </p>
             </div>
-            <p className="font-mono text-[10px] text-muted-foreground">{experience.period}</p>
+            <span className="inline-flex w-fit items-center rounded-full border border-border bg-surface-elevated px-2.5 py-1 font-mono text-[10px] text-muted-foreground">
+              {experience.period}
+            </span>
           </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+          <div className="mt-8 grid gap-8 border-t border-border pt-8 sm:grid-cols-3 sm:gap-6">
             {experience.contributions.map((contribution) => (
               <section key={contribution.title}>
                 <h4 className="section-label text-accent-blue">{contribution.title}</h4>
-                <p className="mt-3 text-sm leading-6 text-foreground/75">
+                <p className="mt-3 text-sm leading-6 text-foreground/80">
                   {contribution.description}
                 </p>
               </section>
@@ -302,7 +304,7 @@ function Experience() {
           </div>
         </article>
 
-        <article className="border-t border-foreground pt-6">
+        <article className="card-elevated p-7 sm:p-9">
           <p className="section-label text-accent-blue">Education</p>
           <h3 className="mt-4 text-xl font-semibold tracking-tight">{profile.education.degree}</h3>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -310,7 +312,7 @@ function Experience() {
             <br />
             {profile.education.graduation}
           </p>
-          <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-foreground/75">
+          <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-foreground/80">
             {profile.education.achievements[0]}
           </p>
         </article>
