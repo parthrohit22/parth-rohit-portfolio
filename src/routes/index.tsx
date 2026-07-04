@@ -98,21 +98,17 @@ function Index() {
 
 function Hero() {
   return (
-    <section id="top" className="scroll-mt-24 py-16 sm:py-24 lg:py-28">
+    <section id="top" className="scroll-mt-24 py-20 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:items-start">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20">
           <div>
-            <p className="section-label text-accent-blue">
+            <p className="eyebrow">
               {profile.name} · {profile.role}
             </p>
-            <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-balance sm:text-5xl sm:leading-[1.08] lg:text-[3.55rem]">
-              {profile.statement}
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">
-              {profile.supporting}
-            </p>
+            <h1 className="display-xl mt-6 max-w-4xl text-balance">{profile.statement}</h1>
+            <p className="body-lg mt-7 max-w-2xl">{profile.supporting}</p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-2.5">
               <a href="#work" className="action-link action-link-primary">
                 Selected Engineering Work <ArrowRight className="h-4 w-4" />
               </a>
@@ -129,43 +125,40 @@ function Hero() {
               </a>
             </div>
 
-            <dl className="mt-10 flex max-w-2xl flex-wrap gap-x-6 gap-y-3 border-t border-border pt-5 text-xs text-muted-foreground">
-              <div className="inline-flex items-center gap-2">
+            <dl className="mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border text-xs text-muted-foreground sm:grid-cols-2">
+              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3">
+                <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <dt className="sr-only">Location</dt>
-                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                <dd>{profile.location}</dd>
+                <dd className="truncate">{profile.location}</dd>
               </div>
-              <div>
-                <dt className="sr-only">Education</dt>
-                <dd>{profile.education.degree}</dd>
-              </div>
-              <div>
-                <dt className="sr-only">Graduation</dt>
-                <dd>{profile.education.graduation}</dd>
-              </div>
-              <div>
+              <div className="bg-surface-elevated px-4 py-3">
                 <dt className="sr-only">Availability</dt>
-                <dd>{profile.availability}</dd>
+                <dd className="truncate">{profile.availability}</dd>
+              </div>
+              <div className="bg-surface-elevated px-4 py-3">
+                <dt className="sr-only">Education</dt>
+                <dd className="truncate">{profile.education.degree}</dd>
+              </div>
+              <div className="bg-surface-elevated px-4 py-3">
+                <dt className="sr-only">Graduation</dt>
+                <dd className="truncate">{profile.education.graduation}</dd>
               </div>
             </dl>
           </div>
 
-          <aside
-            aria-labelledby="evidence-heading"
-            className="border-t border-border lg:border-t-0"
-          >
-            <div className="flex items-center justify-between border-b border-border py-4 lg:pt-0">
+          <aside aria-labelledby="evidence-heading" className="card-elevated p-6 sm:p-7">
+            <div className="flex items-center justify-between border-b border-border pb-4">
               <h2 id="evidence-heading" className="section-label">
                 Evidence before claims
               </h2>
               <span className="font-mono text-[10px] text-muted-foreground">01—04</span>
             </div>
-            <ol>
+            <ol className="divide-y divide-border">
               {proofPoints.map((item, index) => (
-                <li key={item.href} className="border-b border-border">
+                <li key={item.href}>
                   <a
                     href={item.href}
-                    className="group grid grid-cols-[2rem_1fr_auto] gap-3 py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                    className="group -mx-2 grid grid-cols-[2rem_1fr_auto] gap-3 rounded-md px-2 py-4 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                   >
                     <span className="font-mono text-[10px] text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
@@ -179,7 +172,7 @@ function Hero() {
                       </span>
                     </span>
                     <ArrowUpRight
-                      className="mt-0.5 h-4 w-4 text-muted-foreground group-hover:text-foreground"
+                      className="mt-0.5 h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
                       aria-hidden="true"
                     />
                   </a>
