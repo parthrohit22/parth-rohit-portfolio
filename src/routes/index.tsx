@@ -103,25 +103,32 @@ function Index() {
 
 function Hero() {
   return (
-    <section id="top" className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28 lg:py-36">
+    <section id="top" className="relative scroll-mt-24 overflow-hidden pb-16 pt-8 sm:pb-20 sm:pt-12 lg:pb-28 lg:pt-16">
       <div aria-hidden="true" className="hero-backdrop" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:items-center lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:items-center lg:gap-14">
           <div className="reveal-up">
             <p className="eyebrow">
               <span>Parth Rohit</span>
               <span aria-hidden="true" className="opacity-40">/</span>
               <span>{profile.location}</span>
             </p>
+
             <h1 className="display-xl mt-6 max-w-4xl text-balance">
-              <RotatingText />
+              Software Engineer.
             </h1>
-            <p className="body-lg mt-7 max-w-xl">
+
+            <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-lg sm:text-xl font-medium tracking-tight text-muted-foreground">
+              <span>Currently building</span>
+              <RotatingText />
+            </p>
+
+            <p className="body-lg mt-6 max-w-xl">
               Distributed edge workspaces, hash-linked evidence integrity, role-scoped backend
               authority, and merged cloud-security work.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-2.5">
+            <div className="mt-8 flex flex-wrap gap-2.5">
               <a href="#featured" className="action-link action-link-primary">
                 Explore featured systems <ArrowRight className="h-4 w-4" />
               </a>
@@ -138,7 +145,7 @@ function Hero() {
               </a>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
               <span className="inline-flex items-center gap-2">
                 <span className="status-dot" aria-hidden="true" />
                 {profile.availability}
