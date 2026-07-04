@@ -405,17 +405,17 @@ function ContactLink({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="group flex min-w-0 items-center gap-4 bg-card p-5 focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+      className="card-elevated group flex min-w-0 items-center gap-4 p-5"
     >
-      <span className="grid h-9 w-9 shrink-0 place-items-center border border-border text-muted-foreground">
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-border bg-surface-elevated text-accent-blue">
         {icon}
       </span>
       <span className="min-w-0">
-        <span className="section-label block text-muted-foreground">{label}</span>
+        <span className="section-label block">{label}</span>
         <span className="mt-1 block truncate text-sm font-medium">{value}</span>
       </span>
       <ArrowUpRight
-        className="ml-auto h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground"
+        className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
         aria-hidden="true"
       />
     </a>
