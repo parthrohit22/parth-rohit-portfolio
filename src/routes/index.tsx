@@ -220,14 +220,17 @@ function EngineeringApproach() {
       title="Make the important boundaries visible."
       description="These principles recur in the implementation choices above; they are not claims detached from the work."
     >
-      <div className="grid gap-px border border-border bg-border md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {principles.map((principle, index) => (
-          <article key={principle.title} className="bg-card p-6 sm:p-8">
-            <p className="font-mono text-[10px] text-muted-foreground">
-              {String(index + 1).padStart(2, "0")}
-            </p>
-            <h3 className="mt-5 text-xl font-semibold tracking-tight">{principle.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/75">{principle.description}</p>
+          <article key={principle.title} className="card-elevated p-7 sm:p-8">
+            <div className="flex items-center justify-between">
+              <span className="inline-flex items-center rounded-full border border-border bg-surface-elevated px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent-blue" />
+            </div>
+            <h3 className="mt-6 text-xl font-semibold tracking-tight">{principle.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-foreground/80">{principle.description}</p>
             <p className="mt-6 border-t border-border pt-4 font-mono text-[10px] leading-5 text-muted-foreground">
               Evidence: {principle.evidence}
             </p>
