@@ -191,10 +191,12 @@
 }
 
 @utility display-xl {
-  font-size: clamp(2.5rem, 5vw + 0.5rem, 4.5rem);
-  line-height: 1.02;
-  letter-spacing: -0.048em;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.2vw + 0.5rem, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  text-transform: uppercase;
   background: var(--gradient-text);
   background-clip: text;
   -webkit-background-clip: text;
@@ -202,10 +204,12 @@
 }
 
 @utility display-lg {
-  font-size: clamp(2rem, 2.6vw + 0.75rem, 2.75rem);
-  line-height: 1.08;
-  letter-spacing: -0.038em;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 2.8vw + 0.75rem, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 @utility body-lg {
