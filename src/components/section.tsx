@@ -7,6 +7,7 @@ export function Section({
   description,
   number,
   children,
+  meta,
 }: {
   id: string;
   eyebrow: string;
@@ -14,20 +15,22 @@ export function Section({
   description?: string;
   number?: string;
   children: ReactNode;
+  meta?: string;
 }) {
   return (
     <section id={id} className="relative scroll-mt-24 py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <hr className="hairline mb-16 sm:mb-20" />
-        <header className="mb-14 max-w-3xl sm:mb-20">
-          {number && (
-            <p className="section-number mb-4">
-              <span>{number}</span>
-            </p>
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        <div className="ledger mb-14 sm:mb-16">
+          {number && <span className="ledger-num">§ {number}</span>}
+          <span className="ledger-title">{eyebrow}</span>
+          <span className="ledger-dash" aria-hidden="true" />
+          <span className="ledger-meta">{meta ?? "PARTH ROHIT / 2026"}</span>
+        </div>
+        <header className="mb-14 grid gap-8 lg:grid-cols-12 lg:items-end">
+          <h2 className="display-lg lg:col-span-8">{title}</h2>
+          {description && (
+            <p className="body-lg max-w-md lg:col-span-4 lg:pb-2">{description}</p>
           )}
-          <p className="eyebrow">{eyebrow}</p>
-          <h2 className="display-lg mt-5">{title}</h2>
-          {description && <p className="body-lg mt-6 max-w-2xl">{description}</p>}
         </header>
         {children}
       </div>
