@@ -1,73 +1,66 @@
-import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Menu } from "lucide-react";
+import { profile } from "@/lib/portfolio-data";
 
-const resumePdfPath = "/Parth_Rohit_Resume.pdf";
-
-const nav = [
-  { label: "Work", to: "/", hash: "#work" },
-  { label: "Journey", to: "/", hash: "#journey" },
-  { label: "Open Source", to: "/", hash: "#open-source" },
-  { label: "Experience", to: "/", hash: "#experience" },
-  { label: "Resume", to: resumePdfPath, hash: "", opensInNewTab: true },
-  { label: "Contact", to: "/", hash: "#contact" },
+const navigation = [
+  { label: "Work", href: "#work" },
+  { label: "Approach", href: "#approach" },
+  { label: "Capabilities", href: "#capabilities" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all ${
-        scrolled
-          ? "border-b border-border/80 bg-background/80 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link to="/" className="group flex items-center gap-2.5">
-          <span className="text-sm font-semibold tracking-tight">
-            Parth Rohit
-          </span>
-        </Link>
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
+        <a
+          href="#top"
+          className="text-sm font-semibold tracking-tight text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+        >
+          {profile.name}
+        </a>
 
-
-        <nav className="hidden items-center gap-1 md:flex">
-          {nav.map((n) => (
-            <a
-              key={n.label}
-              href={n.to === "/" ? n.hash || "/" : n.to}
-              target={n.opensInNewTab ? "_blank" : undefined}
-              rel={n.opensInNewTab ? "noreferrer" : undefined}
-              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-            >
-              {n.label}
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} className="nav-link">
+              {item.label}
             </a>
           ))}
+          <a
+            href="/Parth_Rohit_Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="nav-link ml-1 border border-border bg-card text-foreground"
+          >
+            Resume
+          </a>
         </nav>
 
-        <a
-          href="https://github.com/parthrohit22"
-          target="_blank"
-          rel="noreferrer"
-          className="hidden items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-accent sm:inline-flex"
-        >
-          <GhIcon /> GitHub
-        </a>
+        <details className="mobile-menu relative md:hidden">
+          <summary className="grid h-10 w-10 cursor-pointer list-none place-items-center border border-border bg-card text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <span className="sr-only">Open navigation</span>
+            <Menu className="h-4 w-4" aria-hidden="true" />
+          </summary>
+          <nav
+            aria-label="Mobile navigation"
+            className="absolute right-0 top-12 w-56 border border-border bg-card p-2 shadow-sm"
+          >
+            {navigation.map((item) => (
+              <a key={item.href} href={item.href} className="mobile-nav-link">
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="/Parth_Rohit_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="mobile-nav-link border-t border-border"
+            >
+              Resume
+            </a>
+          </nav>
+        </details>
       </div>
     </header>
-  );
-}
-
-function GhIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
-      <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.95.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.27 5.68.41.35.78 1.05.78 2.12v3.14c0 .31.21.67.8.55C20.21 21.38 23.5 17.08 23.5 12 23.5 5.73 18.27.5 12 .5z" />
-    </svg>
   );
 }

@@ -7,31 +7,24 @@ export function Section({
   description,
   children,
 }: {
-  id?: string;
-  eyebrow?: string;
+  id: string;
+  eyebrow: string;
   title: string;
   description?: string;
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-12 max-w-2xl">
-          {eyebrow && (
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" />
-              {eyebrow}
-            </div>
-          )}
-          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            {title}
-          </h2>
+    <section id={id} className="scroll-mt-24 border-t border-border py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <header className="mb-12 max-w-3xl sm:mb-16">
+          <p className="section-label text-accent-blue">{eyebrow}</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">{title}</h2>
           {description && (
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
               {description}
             </p>
           )}
-        </div>
+        </header>
         {children}
       </div>
     </section>

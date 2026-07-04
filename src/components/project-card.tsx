@@ -1,126 +1,160 @@
-import type { Project } from "@/lib/portfolio-data";
 import { ArrowUpRight, Github } from "lucide-react";
 import { ProjectDiagram } from "@/components/project-diagram";
+import type { EngineeringCaseStudy } from "@/lib/portfolio-data";
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function EngineeringCaseStudyCard({
+  caseStudy,
+  index,
+  total,
+}: {
+  caseStudy: EngineeringCaseStudy;
+  index: number;
+  total: number;
+}) {
+  const headingId = `${caseStudy.id}-title`;
+
   return (
-    <article className="card-premium card-premium-hover group relative overflow-hidden p-8 sm:p-10">
-      {/* gradient edge */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{
-          background:
-            "linear-gradient(to right, transparent, color-mix(in oklab, var(--accent-blue) 50%, transparent), color-mix(in oklab, var(--accent-violet) 50%, transparent), transparent)",
-        }}
-      />
-
-      <div className="absolute right-6 top-6 font-mono text-[10px] text-muted-foreground sm:right-10 sm:top-10">
-        {String(index + 1).padStart(2, "0")} / 05
-      </div>
-
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">{project.name}</h3>
-        </div>
-
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {project.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-md border border-border bg-surface-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-wider text-accent-blue">
-              Overview
-            </div>
-            <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-foreground/85">
-              {project.summary}
-            </p>
-
-            <div className="mt-6 font-mono text-[10px] uppercase tracking-wider text-accent-blue">
-              System Components
-            </div>
-            <ul className="mt-2 grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-2">
-              {project.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-blue" />
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
-
-            {project.frameworks && (
-              <div className="mt-6">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-accent-violet">
-                  Compliance Frameworks
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {project.frameworks.map((f) => (
-                    <span
-                      key={f}
-                      className="rounded-md bg-foreground/5 px-2 py-0.5 text-[11px] font-mono text-foreground/70"
-                    >
-                      {f}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-wider text-accent-violet">
-              Architecture
-            </div>
-            <div className="mt-2">
-              <ProjectDiagram name={project.name} />
-            </div>
-
-            <div className="mt-5 font-mono text-[10px] uppercase tracking-wider text-accent-violet">
-              Technology Stack
-            </div>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-md border border-border bg-card px-2 py-0.5 font-mono text-[11px] text-foreground/80"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-border pt-6">
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium transition-colors hover:bg-accent"
+    <article
+      id={caseStudy.id}
+      aria-labelledby={headingId}
+      className="scroll-mt-24 border-t border-border py-16 first:border-t-0 first:pt-0 sm:py-24"
+    >
+      <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+        <div className="max-w-3xl">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-blue">
+            Engineering Case Study {String(index + 1).padStart(2, "0")} /{" "}
+            {String(total).padStart(2, "0")}
+          </p>
+          <h3
+            id={headingId}
+            className="mt-3 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl"
           >
-            <Github className="h-3.5 w-3.5" /> Repository
+            {caseStudy.name}
+          </h3>
+          <p className="mt-4 text-lg leading-8 text-foreground/80">{caseStudy.positioning}</p>
+          <p className="mt-4 font-mono text-[11px] leading-5 text-muted-foreground">
+            {caseStudy.domains.join(" · ")}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2 lg:justify-end">
+          <a href={caseStudy.repository} target="_blank" rel="noreferrer" className="action-link">
+            <Github className="h-4 w-4" /> Repository
           </a>
-          {project.demo && (
+          {caseStudy.demo && (
             <a
-              href={project.demo}
+              href={caseStudy.demo}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md bg-foreground px-3 py-1.5 text-xs font-medium text-background transition-opacity hover:opacity-90"
+              className="action-link action-link-primary"
             >
-              Live Demo <ArrowUpRight className="h-3.5 w-3.5" />
+              Live system <ArrowUpRight className="h-4 w-4" />
             </a>
           )}
         </div>
+      </header>
+
+      {caseStudy.contribution && (
+        <div className="mt-8 border-l-2 border-accent-blue bg-surface-muted px-5 py-4 text-sm leading-6 text-foreground/80">
+          <strong className="font-semibold text-foreground">Contribution boundary.</strong>{" "}
+          {caseStudy.contribution}
+        </div>
+      )}
+
+      <section aria-label={`${caseStudy.name} implementation evidence`} className="mt-10">
+        <h4 className="section-label">Implementation evidence</h4>
+        <ul className="mt-4 grid gap-3 lg:grid-cols-3">
+          {caseStudy.evidence.map((item) => (
+            <li
+              key={item}
+              className="border-l border-border pl-4 text-sm leading-6 text-foreground/75"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
+        <section>
+          <h4 className="section-label">Problem</h4>
+          <p className="mt-3 text-[15px] leading-7 text-foreground/80">{caseStudy.problem}</p>
+        </section>
+        <section>
+          <h4 className="section-label">Why it matters</h4>
+          <p className="mt-3 text-[15px] leading-7 text-foreground/80">{caseStudy.significance}</p>
+        </section>
       </div>
+
+      <section className="mt-12">
+        <h4 className="section-label">Architecture</h4>
+        <div className="mt-4">
+          <ProjectDiagram caseStudy={caseStudy} />
+        </div>
+      </section>
+
+      <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-12">
+        <section>
+          <h4 className="section-label">Technical challenges</h4>
+          <ul className="mt-4 space-y-3">
+            {caseStudy.challenges.map((challenge) => (
+              <li key={challenge} className="detail-list-item">
+                {challenge}
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h4 className="section-label">Tradeoffs</h4>
+          <ul className="mt-4 space-y-3">
+            {caseStudy.tradeoffs.map((tradeoff) => (
+              <li key={tradeoff} className="detail-list-item">
+                {tradeoff}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <section className="mt-12 border-y border-border py-5">
+        <h4 className="section-label">Supporting technologies</h4>
+        <p className="mt-3 font-mono text-xs leading-6 text-foreground/70">
+          {caseStudy.technologies.join(" · ")}
+        </p>
+      </section>
+
+      <section className="mt-12" aria-label={`${caseStudy.name} engineering decisions`}>
+        <h4 className="section-label">Engineering Decision Highlights</h4>
+        <div
+          className={`mt-4 grid gap-4 ${caseStudy.decisions.length > 1 ? "lg:grid-cols-2" : ""}`}
+        >
+          {caseStudy.decisions.map((decision) => (
+            <div key={decision.choice} className="border border-border bg-card p-5 sm:p-6">
+              <h5 className="text-base font-semibold tracking-tight">{decision.choice}</h5>
+              <dl className="mt-5 space-y-4 text-sm leading-6">
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-accent-blue">
+                    Why this fits
+                  </dt>
+                  <dd className="mt-1 text-foreground/75">{decision.rationale}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    Why not the obvious alternative
+                  </dt>
+                  <dd className="mt-1 text-foreground/75">{decision.rejectedAlternative}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    Consequence
+                  </dt>
+                  <dd className="mt-1 text-foreground/75">{decision.consequence}</dd>
+                </div>
+              </dl>
+            </div>
+          ))}
+        </div>
+      </section>
     </article>
   );
 }
-

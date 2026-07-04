@@ -1,125 +1,172 @@
-/**
- * Compact architecture diagram per project.
- * Each renders 4 labeled nodes connected with animated data flow.
- */
-type Node = { label: string; sub?: string };
+import type {
+  ArchitectureEdge,
+  ArchitectureNode,
+  EngineeringCaseStudy,
+} from "@/lib/portfolio-data";
 
-const diagrams: Record<string, { nodes: Node[]; accent: "blue" | "violet" }> = {
-  LYTA: {
-    nodes: [
-      { label: "User", sub: "browser" },
-      { label: "Durable Object", sub: "workspace" },
-      { label: "Storage", sub: "state · files" },
-      { label: "Workers AI", sub: "inference" },
-    ],
-    accent: "blue",
-  },
-  OpenShield: {
-    nodes: [
-      { label: "Azure", sub: "resources" },
-      { label: "Scanner", sub: "rules" },
-      { label: "Compliance", sub: "engine" },
-      { label: "Dashboard", sub: "findings" },
-    ],
-    accent: "violet",
-  },
-  KALYX: {
-    nodes: [
-      { label: "Input", sub: "events" },
-      { label: "Hash Chain", sub: "ledger" },
-      { label: "Verification", sub: "deterministic" },
-      { label: "Audit Trail", sub: "tamper-evident" },
-    ],
-    accent: "blue",
-  },
-  FieldSight: {
-    nodes: [
-      { label: "API", sub: "App Service" },
-      { label: "Cosmos DB", sub: "metadata" },
-      { label: "Blob Storage", sub: "media" },
-      { label: "Telemetry", sub: "App Insights" },
-    ],
-    accent: "violet",
-  },
-  "Payment Routing System": {
-    nodes: [
-      { label: "Client", sub: "Angular" },
-      { label: "Auth", sub: "JWT · RBAC" },
-      { label: "Routing", sub: "engine" },
-      { label: "Analytics", sub: "merchant" },
-    ],
-    accent: "blue",
-  },
-};
+const NODE_WIDTH = 172;
+const NODE_HEIGHT = 60;
 
-export function ProjectDiagram({ name }: { name: string }) {
-  const data = diagrams[name];
-  if (!data) return null;
-  const accent = data.accent === "violet" ? "oklch(0.58 0.2 290)" : "oklch(0.6 0.18 255)";
+function edgeCoordinates(edge: ArchitectureEdge, nodes: Map<string, ArchitectureNode>) {
+  const from = nodes.get(edge.from);
+  const to = nodes.get(edge.to);
+
+  if (!from || !to) return null;
+
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const halfWidth = NODE_WIDTH / 2;
+  const halfHeight = NODE_HEIGHT / 2;
+  const xScale = dx === 0 ? Number.POSITIVE_INFINITY : halfWidth / Math.abs(dx);
+  const yScale = dy === 0 ? Number.POSITIVE_INFINITY : halfHeight / Math.abs(dy);
+  const scale = Math.min(xScale, yScale);
+
+  return {
+    x1: from.x + dx * scale,
+    y1: from.y + dy * scale,
+    x2: to.x - dx * scale,
+    y2: to.y - dy * scale,
+    labelX: (from.x + to.x) / 2,
+    labelY: Math.abs(dy) < 10 ? from.y - NODE_HEIGHT / 2 - 8 : (from.y + to.y) / 2 - 8,
+  };
+}
+
+export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy }) {
+  const { architecture } = caseStudy;
+  const nodes = new Map(architecture.nodes.map((node) => [node.id, node]));
+  const markerId = `${caseStudy.id}-architecture-arrow`;
+  const titleId = `${caseStudy.id}-architecture-title`;
+  const descriptionId = `${caseStudy.id}-architecture-description`;
 
   return (
-    <div className="rounded-xl border border-border bg-gradient-to-b from-surface to-background p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
-          architecture
-        </span>
-        <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
-          {name.toLowerCase().replace(/\s+/g, "-")}.flow
-        </span>
+    <figure className="border border-border bg-surface-muted/55 p-4 sm:p-6">
+      <figcaption className="mb-5 max-w-3xl text-sm leading-6 text-muted-foreground">
+        {architecture.caption}
+      </figcaption>
+
+      <div className="sm:hidden">
+        <ol className="space-y-2" aria-label={`${caseStudy.name} architecture flow`}>
+          {architecture.edges.map((edge, index) => {
+            const from = nodes.get(edge.from);
+            const to = nodes.get(edge.to);
+            if (!from || !to) return null;
+
+            return (
+              <li
+                key={`${edge.from}-${edge.to}`}
+                className="grid grid-cols-[1.5rem_1fr] gap-2 border-l border-border py-1 pl-3 text-sm"
+              >
+                <span className="font-mono text-[10px] text-muted-foreground">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>
+                  <strong className="font-medium text-foreground">{from.label}</strong>
+                  <span className="mx-2 text-accent-blue" aria-hidden="true">
+                    →
+                  </span>
+                  <strong className="font-medium text-foreground">{to.label}</strong>
+                  {edge.label && (
+                    <span className="ml-2 text-xs text-muted-foreground">{edge.label}</span>
+                  )}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
       </div>
-      <svg viewBox="0 0 520 120" className="h-auto w-full" role="img" aria-label={`${name} architecture`}>
+
+      <svg
+        viewBox="0 0 1000 340"
+        className="hidden h-auto w-full sm:block"
+        role="img"
+        aria-labelledby={`${titleId} ${descriptionId}`}
+      >
+        <title id={titleId}>{`${caseStudy.name} architecture`}</title>
+        <desc id={descriptionId}>{architecture.caption}</desc>
         <defs>
-          <linearGradient id={`flow-${name.replace(/\s+/g, "")}`} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor={accent} stopOpacity="0.15" />
-            <stop offset="50%" stopColor={accent} stopOpacity="0.9" />
-            <stop offset="100%" stopColor={accent} stopOpacity="0.15" />
-          </linearGradient>
+          <marker
+            id={markerId}
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent-blue)" />
+          </marker>
         </defs>
 
-        {/* connectors */}
-        {[0, 1, 2].map((i) => {
-          const x1 = 35 + 120 + i * 120;
-          const x2 = x1 + 35;
-          return (
-            <g key={i}>
-              <line x1={x1} y1="60" x2={x2} y2="60" stroke={`url(#flow-${name.replace(/\s+/g, "")})`} strokeWidth="1.25" />
-              <polygon points={`${x2},60 ${x2 - 5},57 ${x2 - 5},63`} fill={accent} opacity="0.7" />
-              <circle r="2.5" fill={accent}>
-                <animateMotion dur="2.4s" repeatCount="indefinite" begin={`${i * 0.4}s`} path={`M ${x1} 60 L ${x2} 60`} />
-              </circle>
-            </g>
-          );
-        })}
+        <g className="text-accent-blue">
+          {architecture.edges.map((edge) => {
+            const coordinates = edgeCoordinates(edge, nodes);
+            if (!coordinates) return null;
 
-        {/* nodes */}
-        {data.nodes.map((n, i) => {
-          const x = 35 + i * 120;
-          return (
-            <g key={n.label}>
-              <rect
-                x={x}
-                y="35"
-                width="120"
-                height="50"
-                rx="8"
-                fill="oklch(1 0 0)"
-                stroke="oklch(0.92 0.008 255)"
-              />
-              <circle cx={x + 12} cy="60" r="3" fill={accent}>
-                <animate attributeName="opacity" values="0.4;1;0.4" dur="2.4s" repeatCount="indefinite" begin={`${i * 0.3}s`} />
-              </circle>
-              <text x={x + 22} y="57" fontSize="11" fontFamily="ui-monospace, monospace" fill="oklch(0.18 0.02 260)" fontWeight="600">
-                {n.label}
-              </text>
-              {n.sub && (
-                <text x={x + 22} y="71" fontSize="9" fontFamily="ui-monospace, monospace" fill="oklch(0.5 0.02 260)">
-                  {n.sub}
-                </text>
-              )}
-            </g>
-          );
-        })}
+            return (
+              <g key={`${edge.from}-${edge.to}`}>
+                <line
+                  x1={coordinates.x1}
+                  y1={coordinates.y1}
+                  x2={coordinates.x2}
+                  y2={coordinates.y2}
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  markerEnd={`url(#${markerId})`}
+                />
+                {edge.label && (
+                  <text
+                    x={coordinates.labelX}
+                    y={coordinates.labelY}
+                    textAnchor="middle"
+                    fontFamily="ui-monospace, monospace"
+                    fontSize="10"
+                    fill="currentColor"
+                    stroke="var(--surface-muted)"
+                    strokeWidth="4"
+                    paintOrder="stroke"
+                  >
+                    {edge.label}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </g>
+
+        {architecture.nodes.map((node) => (
+          <g key={node.id}>
+            <rect
+              x={node.x - NODE_WIDTH / 2}
+              y={node.y - NODE_HEIGHT / 2}
+              width={NODE_WIDTH}
+              height={NODE_HEIGHT}
+              rx="6"
+              fill="var(--card)"
+              stroke="var(--border)"
+            />
+            <circle cx={node.x - 67} cy={node.y} r="3" fill="var(--accent-blue)" />
+            <text
+              x={node.x - 56}
+              y={node.y - 4}
+              fontFamily="Inter, ui-sans-serif, sans-serif"
+              fontSize="12"
+              fontWeight="600"
+              fill="var(--foreground)"
+            >
+              {node.label}
+            </text>
+            <text
+              x={node.x - 56}
+              y={node.y + 13}
+              fontFamily="ui-monospace, monospace"
+              fontSize="9.5"
+              fill="var(--muted-foreground)"
+            >
+              {node.detail}
+            </text>
+          </g>
+        ))}
       </svg>
-    </div>
+    </figure>
   );
 }
