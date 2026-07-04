@@ -217,11 +217,11 @@ export function EngineeringCaseStudyCard({
                       className="absolute left-0 top-6 h-8 w-0.5 rounded-r"
                       style={{ background: "var(--project-accent)" }}
                     />
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5 font-mono text-[10px] text-muted-foreground">
+                    <div className="flex items-baseline gap-3">
+                      <span className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                         {String(decisionIndex + 1).padStart(2, "0")}
                       </span>
-                      <h5 className="text-base font-semibold tracking-tight">
+                      <h5 className="font-display text-2xl italic leading-tight tracking-[-0.01em]">
                         {decision.choice}
                       </h5>
                     </div>
