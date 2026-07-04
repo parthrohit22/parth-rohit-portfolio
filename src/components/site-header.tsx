@@ -11,13 +11,28 @@ const navigation = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl backdrop-saturate-150">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
         <a
           href="#top"
-          className="text-sm font-semibold tracking-tight text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+          className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
         >
-          {profile.name}
+          <span
+            aria-hidden="true"
+            className="grid h-7 w-7 place-items-center rounded-md border border-border bg-gradient-to-br from-surface-elevated to-surface-muted font-mono text-[11px] font-semibold text-accent-blue shadow-sm"
+          >
+            PR
+          </span>
+          <span className="text-sm font-semibold tracking-tight text-foreground">
+            {profile.name}
+          </span>
+          <span
+            aria-hidden="true"
+            className="hidden items-center gap-1.5 rounded-full border border-border bg-surface-elevated px-2 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline-flex"
+          >
+            <span className="status-dot" />
+            Available Sept 2026
+          </span>
         </a>
 
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary navigation">
@@ -30,7 +45,7 @@ export function SiteHeader() {
             href="/Parth_Rohit_Resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="action-link ml-3 h-9 min-h-9 px-3 py-1.5 text-xs"
+            className="action-link action-link-primary ml-3 h-9 min-h-9 px-3 py-1.5 text-xs"
           >
             Resume
           </a>

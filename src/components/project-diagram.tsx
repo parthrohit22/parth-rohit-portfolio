@@ -41,9 +41,22 @@ export function ProjectDiagram({ caseStudy }: { caseStudy: EngineeringCaseStudy 
 
   return (
     <figure
-      className="overflow-hidden rounded-xl border border-border"
+      className="overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)]"
       style={{ background: "var(--gradient-diagram-bg)" }}
     >
+      <div className="flex items-center justify-between gap-3 border-b border-border/70 bg-surface-elevated/60 px-5 py-3 sm:px-6">
+        <div className="flex items-center gap-2">
+          <span aria-hidden="true" className="h-2 w-2 rounded-full bg-destructive/70" />
+          <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent-blue/40" />
+          <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent-blue" />
+          <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            architecture.svg
+          </span>
+        </div>
+        <span className="font-mono text-[10px] text-muted-foreground">
+          {architecture.nodes.length} nodes · {architecture.edges.length} edges
+        </span>
+      </div>
       <figcaption className="border-b border-border/70 px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
         {architecture.caption}
       </figcaption>
