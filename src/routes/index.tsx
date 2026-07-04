@@ -329,8 +329,8 @@ function Contact() {
       title="Continue the technical conversation."
       description="Open to UK graduate and new-grad software engineering opportunities from September 2026."
     >
-      <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr]">
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr]">
+        <div className="grid gap-3 sm:grid-cols-2">
           <ContactLink
             href={`mailto:${profile.email}`}
             icon={<Mail className="h-4 w-4" />}
@@ -359,7 +359,7 @@ function Contact() {
           />
         </div>
 
-        <aside className="border-t border-foreground pt-6">
+        <aside className="card-elevated p-7 sm:p-8">
           <p className="section-label text-accent-blue">Resume</p>
           <h3 className="mt-4 text-xl font-semibold tracking-tight">
             Concise background and selected work.
@@ -368,7 +368,7 @@ function Contact() {
             The PDF remains the single source of truth for education, experience, capabilities, and
             contact details.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-2.5">
             <a
               href="/Parth_Rohit_Resume.pdf"
               target="_blank"
