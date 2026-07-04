@@ -1,6 +1,8 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { caseStudies } from "@/lib/portfolio-data";
 import { useReveal } from "@/hooks/use-reveal";
+import { Tilt } from "@/components/tilt";
+import { Magnetic } from "@/components/magnetic";
 
 const FEATURED_META: Record<
   string,
