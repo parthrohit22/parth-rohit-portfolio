@@ -76,11 +76,7 @@ export function Magnetic({
   }, [radius, strength]);
 
   return (
-    <span
-      ref={ref}
-      className="magnetic-zone relative inline-flex"
-      style={{ padding: "10px", margin: "-10px" }}
-    >
+    <span ref={ref} className="magnetic-zone inline-flex">
       {children}
     </span>
   );
