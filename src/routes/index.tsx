@@ -98,12 +98,15 @@ function Index() {
 
 function Hero() {
   return (
-    <section id="top" className="scroll-mt-24 py-20 sm:py-28 lg:py-32">
+    <section id="top" className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28 lg:py-36">
+      <div aria-hidden="true" className="hero-backdrop" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20">
-          <div>
+          <div className="reveal-up">
             <p className="eyebrow">
-              {profile.name} · {profile.role}
+              <span>{profile.role}</span>
+              <span aria-hidden="true" className="opacity-40">/</span>
+              <span>{profile.location}</span>
             </p>
             <h1 className="display-xl mt-6 max-w-4xl text-balance">{profile.statement}</h1>
             <p className="body-lg mt-7 max-w-2xl">{profile.supporting}</p>
@@ -125,28 +128,32 @@ function Hero() {
               </a>
             </div>
 
-            <dl className="mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border text-xs text-muted-foreground sm:grid-cols-2">
-              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3">
-                <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            <dl className="mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border text-xs text-muted-foreground sm:grid-cols-2">
+              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3.5">
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-accent-blue" aria-hidden="true" />
                 <dt className="sr-only">Location</dt>
                 <dd className="truncate">{profile.location}</dd>
               </div>
-              <div className="bg-surface-elevated px-4 py-3">
+              <div className="flex items-center gap-2 bg-surface-elevated px-4 py-3.5">
+                <span className="status-dot shrink-0" aria-hidden="true" />
                 <dt className="sr-only">Availability</dt>
                 <dd className="truncate">{profile.availability}</dd>
               </div>
-              <div className="bg-surface-elevated px-4 py-3">
+              <div className="bg-surface-elevated px-4 py-3.5">
                 <dt className="sr-only">Education</dt>
                 <dd className="truncate">{profile.education.degree}</dd>
               </div>
-              <div className="bg-surface-elevated px-4 py-3">
+              <div className="bg-surface-elevated px-4 py-3.5">
                 <dt className="sr-only">Graduation</dt>
                 <dd className="truncate">{profile.education.graduation}</dd>
               </div>
             </dl>
           </div>
 
-          <aside aria-labelledby="evidence-heading" className="card-elevated p-6 sm:p-7">
+          <aside
+            aria-labelledby="evidence-heading"
+            className="card-elevated card-glow p-6 sm:p-7"
+          >
             <div className="flex items-center justify-between border-b border-border pb-4">
               <h2 id="evidence-heading" className="section-label">
                 Evidence before claims
@@ -160,7 +167,7 @@ function Hero() {
                     href={item.href}
                     className="group -mx-2 grid grid-cols-[2rem_1fr_auto] gap-3 rounded-md px-2 py-4 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                   >
-                    <span className="font-mono text-[10px] text-muted-foreground">
+                    <span className="font-mono text-[10px] text-accent-blue">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span>
