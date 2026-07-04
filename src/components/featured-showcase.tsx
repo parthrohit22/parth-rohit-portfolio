@@ -58,8 +58,8 @@ export function FeaturedShowcase() {
 
         <div className="mb-12 grid gap-8 lg:grid-cols-12 lg:items-end">
           <h2 id="featured-heading" className="display-lg lg:col-span-8">
-            Three systems worth <span className="text-[color:var(--aurora-green)] not-italic font-mono text-3xl align-middle">→</span>{" "}
-            <em className="font-display italic">studying.</em>
+            Three systems worth <span className="text-[color:var(--accent-blue)] font-mono text-3xl align-middle">→</span>{" "}
+            <span className="text-foreground">studying.</span>
           </h2>
           <div className="lg:col-span-4 lg:pb-2 lg:text-right">
             <Magnetic>
